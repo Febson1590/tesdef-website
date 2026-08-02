@@ -7,20 +7,14 @@ import { Container } from "./Container";
 import { Logo } from "./Logo";
 import { Button } from "./Button";
 
-/**
- * Primary navigation.
- * NOTE: Only the homepage exists in this sprint. Secondary destinations are
- * intentionally set to "#" placeholders and become real routes in later
- * sprints (/about, /programmes, /projects, /news, /get-involved, /contact).
- */
 const NAV_ITEMS: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "#" },
-  { label: "Programmes", href: "#" },
-  { label: "Projects", href: "#" },
-  { label: "News & Events", href: "#" },
-  { label: "Get Involved", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "About", href: "/about" },
+  { label: "Programmes", href: "/programmes" },
+  { label: "Projects", href: "/projects" },
+  { label: "News & Events", href: "/news" },
+  { label: "Get Involved", href: "/get-involved" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
@@ -46,7 +40,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-black/5 bg-offwhite/85 backdrop-blur-md">
       <Container>
-        <div className="flex h-16 items-center justify-between gap-4">
+        <div className="flex h-14 items-center justify-between gap-3 lg:h-16 lg:gap-4">
           <Logo />
 
           {/* Desktop navigation */}
@@ -70,8 +64,13 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-2">
-            <Button href="#" variant="primary" size="sm" className="hidden sm:inline-flex">
+          <div className="flex items-center gap-1.5 lg:gap-2">
+            <Button
+              href="/donate"
+              variant="primary"
+              size="sm"
+              className="h-9 px-3.5 text-xs lg:px-4 lg:text-sm"
+            >
               Donate
             </Button>
 
@@ -82,7 +81,7 @@ export function Header() {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-forest transition-colors hover:bg-mint lg:hidden"
+              className="-mr-1.5 inline-flex h-10 w-10 items-center justify-center rounded-lg text-forest transition-colors hover:bg-mint lg:hidden"
             >
               {open ? (
                 <svg
@@ -136,7 +135,7 @@ export function Header() {
               </Link>
             ))}
             <Button
-              href="#"
+              href="/donate"
               variant="primary"
               size="lg"
               className="mt-2 w-full"

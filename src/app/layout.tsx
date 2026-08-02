@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Sora } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,7 +19,9 @@ const SITE_NAME =
   "Tamarakuro Environmental and Sustainable Development Foundation";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tesdef.org"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://tesdef-website.vercel.app"
+  ),
   title: {
     default: `TESDEF — ${SITE_NAME}`,
     template: "%s | TESDEF",
@@ -38,6 +38,8 @@ export const metadata: Metadata = {
     "community development",
     "non-profit",
     "NGO",
+    "reforestation",
+    "digital inclusion",
   ],
   openGraph: {
     type: "website",
@@ -46,32 +48,26 @@ export const metadata: Metadata = {
     description:
       "Empowering Communities. Protecting Nature. Building the Future.",
   },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
   themeColor: "#0b3d2e",
   colorScheme: "light",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="en"
       className={`${inter.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-offwhite text-ink">
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

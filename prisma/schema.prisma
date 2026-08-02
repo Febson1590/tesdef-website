@@ -1,0 +1,227 @@
+// TESDEF — Prisma schema
+// Dev: SQLite (DATABASE_URL="file:./dev.db")
+// Prod: switch provider to "postgresql" and update DATABASE_URL
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ─── Content models ───────────────────────────────────────────────────────────
+
+model Programme {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  tagline     String    @default("")
+  description String
+  icon        String    @default("")
+  colour      String    @default("primary")
+  order       Int       @default(0)
+  published   Boolean   @default(true)
+  projects    Project[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Project {
+  id             String           @id @default(cuid())
+  slug           String           @unique
+  title          String
+  summary        String
+  story          String
+  coverImage     String           @default("")
+  programme      Programme?       @relation(fields: [programmeId], references: [id])
+  programmeId    String?
+  objectives     String           @default("[]")
+  location       String           @default("")
+  startDate      DateTime?
+  endDate        DateTime?
+  fundingGoal    Float            @default(0)
+  amountRaised   Float            @default(0)
+  supporterCount Int              @default(0)
+  status         String           @default("active")
+  howFundsUsed   String           @default("[]")
+  published      Boolean          @default(true)
+  images         ProjectImage[]
+  updates        ProjectUpdate[]
+  donations      DonationRecord[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model ProjectImage {
+  id        String  @id @default(cuid())
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+  url       String
+  caption   String  @default("")
+  order     Int     @default(0)
+}
+
+model ProjectUpdate {
+  id        String   @id @default(cuid())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+  title     String
+  content   String
+  image     String   @default("")
+  createdAt DateTime @default(now())
+}
+
+model NewsPost {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  excerpt     String
+  content     String
+  coverImage  String    @default("")
+  category    String    @default("")
+  tags        String    @default("[]")
+  published   Boolean   @default(true)
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Event {
+  id               String    @id @default(cuid())
+  slug             String    @unique
+  title            String
+  excerpt          String    @default("")
+  description      String
+  coverImage       String    @default("")
+  location         String    @default("")
+  isVirtual        Boolean   @default(false)
+  startDate        DateTime
+  endDate          DateTime?
+  registrationLink String    @default("")
+  published        Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model GalleryItem {
+  id        String   @id @default(cuid())
+  title     String   @default("")
+  url       String
+  caption   String   @default("")
+  category  String   @default("")
+  alt       String   @default("")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model ImpactStat {
+  id          String   @id @default(cuid())
+  label       String
+  value       String
+  description String   @default("")
+  suffix      String   @default("")
+  icon        String   @default("")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  quote     String
+  name      String
+  role      String   @default("")
+  location  String   @default("")
+  image     String   @default("")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model TeamMember {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  bio       String   @default("")
+  image     String   @default("")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Partner {
+  id        String   @id @default(cuid())
+  name      String
+  logo      String   @default("")
+  website   String   @default("")
+  category  String   @default("")
+  order     Int      @default(0)
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ─── Forms / enquiries ────────────────────────────────────────────────────────
+
+model DonationRecord {
+  id        String   @id @default(cuid())
+  amount    Float
+  currency  String   @default("NGN")
+  name      String   @default("")
+  email     String   @default("")
+  message   String   @default("")
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+}
+
+model VolunteerApplication {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String   @default("")
+  skills    String   @default("")
+  interests String   @default("")
+  message   String   @default("")
+  status    String   @default("pending")
+  createdAt DateTime @default(now())
+}
+
+model PartnershipEnquiry {
+  id          String   @id @default(cuid())
+  orgName     String
+  contactName String
+  email       String
+  phone       String   @default("")
+  type        String   @default("")
+  message     String   @default("")
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String   @default("")
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ─── Admin ────────────────────────────────────────────────────────────────────
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("editor")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

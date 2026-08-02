@@ -1,0 +1,68 @@
+import { AdminHeader } from "@/components/admin/AdminHeader";
+import { AdminTable } from "@/components/admin/AdminTable";
+import { prisma } from "@/lib/prisma";
+import { createPartner, deletePartner } from "./actions";
+
+export const metadata = { title: "Partners" };
+
+export default async function AdminPartnersPage() {
+  const partners = await prisma.partner.findMany({ orderBy: { name: "asc" } });
+
+  return (
+    <>
+      <AdminHeader title="Partners" />
+      <div className="p-6 space-y-8">
+        <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+          <h2 className="mb-5 font-display text-lg font-bold text-forest">Add partner</h2>
+          <form action={createPartner} className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-forest">Organisation name *</label>
+              <input name="name" required className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-forest">Category</label>
+              <select name="category" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none">
+                <option value="ngo">NGO</option>
+                <option value="government">Government</option>
+                <option value="corporate">Corporate</option>
+                <option value="academic">Academic</option>
+                <option value="media">Media</option>
+              </select>
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-forest">Website</label>
+              <input name="website" type="url" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-forest">Logo URL</label>
+              <input name="logo" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
+            </div>
+            <div className="sm:col-span-2">
+              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add partner</button>
+            </div>
+          </form>
+        </section>
+
+        <section>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">All partners ({partners.length})</h2>
+          <AdminTable
+            keyField="id"
+            columns={[
+              { key: "name", label: "Name" },
+              { key: "category", label: "Category" },
+              { key: "website", label: "Website" },
+              {
+                key: "actions", label: "", render: (r) => (
+                  <form action={deletePartner.bind(null, r.id as string)}>
+                    <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
+                  </form>
+                ),
+              },
+            ]}
+            rows={partners as unknown as Record<string, unknown>[]}
+          />
+        </section>
+      </div>
+    </>
+  );
+}
