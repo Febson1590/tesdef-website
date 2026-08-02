@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "./Container";
 
 /**
@@ -42,11 +43,17 @@ export function Footer() {
   return (
     <footer className="bg-forest text-white/80">
       <Container className="flex flex-col items-center gap-6 py-10 text-center sm:flex-row sm:justify-between sm:text-left">
-        <div>
-          <p className="font-display text-lg font-extrabold tracking-tight text-white">
-            TESDEF
-          </p>
-          <p className="mt-1 text-sm text-white/70">
+        <div className="flex flex-col items-center gap-3 sm:items-start">
+          <span className="inline-flex rounded-xl bg-white px-4 py-2.5 shadow-sm">
+            <Image
+              src="/images/logos/tesdef_logo_transparent.png"
+              alt="TESDEF — Tamarakuro Environmental and Sustainable Development Foundation"
+              width={854}
+              height={311}
+              className="h-9 w-auto"
+            />
+          </span>
+          <p className="max-w-xs text-sm text-white/70">
             Empowering Communities. Protecting Nature. Building the Future.
           </p>
         </div>
