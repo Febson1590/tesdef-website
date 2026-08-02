@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "./Container";
 import { Button } from "./Button";
 
@@ -84,7 +85,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Visual column — refined, replaceable nature treatment (no stock image) */}
+        {/* Visual column — real photograph, premium framing */}
         <div className="relative">
           <HeroVisual />
         </div>
@@ -94,63 +95,58 @@ export function Hero() {
 }
 
 /**
- * Temporary premium visual treatment: a forest-gradient panel with a
- * topographic contour motif. Purely decorative and easily replaced with a
- * real photograph later (drop into /public/images/hero and swap this block).
+ * Hero photograph: community tree planting in the Niger Delta.
+ * Source asset: /public/images/hero/hero-tree-planting.jpg
+ * (optimised from the original supplied photo).
  */
 function HeroVisual() {
   return (
-    <div
-      aria-hidden="true"
-      className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl shadow-xl ring-1 ring-black/5 sm:max-w-lg lg:max-w-none"
-    >
-      {/* Gradient base */}
-      <div className="absolute inset-0 bg-gradient-to-br from-forest via-[#124a34] to-primary" />
+    <div className="relative mx-auto w-full max-w-md sm:max-w-lg lg:max-w-none">
+      {/* Layered accent panels for depth */}
+      <div
+        aria-hidden="true"
+        className="absolute -right-3 -top-3 h-full w-full rounded-3xl bg-mint sm:-right-4 sm:-top-4"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute -bottom-8 -left-8 hidden h-40 w-40 rounded-full bg-fresh/20 blur-3xl lg:block"
+      />
 
-      {/* Topographic contour lines */}
-      <svg
-        className="absolute inset-0 h-full w-full"
-        viewBox="0 0 400 500"
-        preserveAspectRatio="xMidYMid slice"
-        fill="none"
-      >
-        <g stroke="#8CC63F" strokeOpacity="0.22" strokeWidth="1.5">
-          <path d="M-20 120C80 60 200 90 300 40s140-40 160-60" />
-          <path d="M-20 170C80 110 200 140 300 90s140-40 160-60" />
-          <path d="M-20 230C90 170 210 205 320 150s120-30 140-50" />
-          <path d="M-20 300C100 240 220 275 330 220s110-25 130-45" />
-          <path d="M-20 370C110 310 230 345 340 290s100-20 120-40" />
-          <path d="M-20 440C120 380 240 415 350 360s90-15 110-35" />
-        </g>
-        <g fill="#8CC63F" fillOpacity="0.5">
-          <circle cx="300" cy="90" r="2.5" />
-          <circle cx="320" cy="150" r="2" />
-          <circle cx="330" cy="220" r="2" />
-        </g>
-      </svg>
+      <figure className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-black/10">
+        <Image
+          src="/images/hero/hero-tree-planting.jpg"
+          alt="TESDEF volunteers planting a young tree sapling in rich soil on a green hillside, with community members reforesting the land and the Niger Delta hills at golden hour behind them"
+          fill
+          priority
+          sizes="(max-width: 1024px) 90vw, 45vw"
+          className="object-cover object-[62%_45%]"
+        />
 
-      {/* Soft glow */}
-      <div className="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-fresh/20 blur-2xl" />
+        {/* Subtle brand-tinted gradient — only to seat the caption legibly */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-forest/85 via-forest/25 to-transparent"
+        />
 
-      {/* Floating leaf glyph */}
-      <div className="absolute bottom-6 left-6 grid h-16 w-16 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/20 backdrop-blur-sm">
-        <svg viewBox="0 0 24 24" className="h-8 w-8" fill="none">
-          <path
-            d="M20 4C11 4 4 9.5 4 17c0 1.2.2 2.3.5 3.3C6 14 11 10.5 17 9.5c-4.5 2-7.8 5.4-9.4 10.5.9.3 1.9.5 3 .5C18 20.5 20 12 20 4Z"
-            fill="#8CC63F"
-          />
-        </svg>
-      </div>
-
-      {/* Caption chip */}
-      <div className="absolute bottom-6 right-6 rounded-xl bg-white/95 px-4 py-3 shadow-lg">
-        <p className="font-display text-sm font-bold leading-tight text-forest">
-          Niger Delta
-        </p>
-        <p className="text-[11px] font-medium text-muted">
-          Rooted in community
-        </p>
-      </div>
+        <figcaption className="absolute inset-x-5 bottom-5 flex items-center gap-3">
+          <span className="grid h-11 w-11 flex-none place-items-center rounded-xl bg-white/15 ring-1 ring-white/25 backdrop-blur-sm">
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden="true">
+              <path
+                d="M20 4C11 4 4 9.5 4 17c0 1.2.2 2.3.5 3.3C6 14 11 10.5 17 9.5c-4.5 2-7.8 5.4-9.4 10.5.9.3 1.9.5 3 .5C18 20.5 20 12 20 4Z"
+                fill="#8CC63F"
+              />
+            </svg>
+          </span>
+          <span className="flex flex-col leading-tight">
+            <span className="font-display text-sm font-bold text-white">
+              Community tree planting
+            </span>
+            <span className="text-xs font-medium text-white/80">
+              Reforesting the Niger Delta
+            </span>
+          </span>
+        </figcaption>
+      </figure>
     </div>
   );
 }
