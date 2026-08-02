@@ -105,44 +105,57 @@ function HeroVisual() {
       {/* Layered accent panels for depth */}
       <div
         aria-hidden="true"
-        className="absolute -right-3 -top-3 h-full w-full rounded-3xl bg-mint sm:-right-4 sm:-top-4"
+        className="absolute -right-4 -top-4 hidden h-full w-full rounded-3xl bg-mint lg:block"
       />
       <div
         aria-hidden="true"
         className="absolute -bottom-8 -left-8 hidden h-40 w-40 rounded-full bg-fresh/20 blur-3xl lg:block"
       />
 
-      <figure className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-black/10">
+      <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-black/10 lg:aspect-[4/5]">
         <Image
           src="/images/hero/hero-tree-planting.jpg"
           alt="TESDEF volunteers planting a young tree sapling in rich soil on a green hillside, with community members reforesting the land and the Niger Delta hills at golden hour behind them"
           fill
           priority
-          sizes="(max-width: 1024px) 90vw, 45vw"
-          className="object-cover object-[62%_45%]"
+          sizes="(max-width: 1024px) 92vw, 45vw"
+          className="object-cover object-[70%_50%] lg:object-[62%_45%]"
         />
 
-        {/* Subtle brand-tinted gradient — only to seat the caption legibly */}
+        {/* Brand-tinted bottom gradient — small on mobile, unchanged on desktop */}
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-forest/85 via-forest/25 to-transparent"
+          className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-forest/80 via-forest/15 to-transparent lg:h-2/5 lg:from-forest/85 lg:via-forest/25"
         />
 
-        <figcaption className="absolute inset-x-5 bottom-5 flex items-center gap-3">
-          <span className="grid h-11 w-11 flex-none place-items-center rounded-xl bg-white/15 ring-1 ring-white/25 backdrop-blur-sm">
-            <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden="true">
-              <path
-                d="M20 4C11 4 4 9.5 4 17c0 1.2.2 2.3.5 3.3C6 14 11 10.5 17 9.5c-4.5 2-7.8 5.4-9.4 10.5.9.3 1.9.5 3 .5C18 20.5 20 12 20 4Z"
-                fill="#8CC63F"
-              />
-            </svg>
-          </span>
-          <span className="flex flex-col leading-tight">
-            <span className="font-display text-sm font-bold text-white">
+        <figcaption className="absolute inset-x-4 bottom-4 lg:inset-x-5 lg:bottom-5">
+          {/* Mobile: minimal caption, no badge or location */}
+          <span className="block lg:hidden">
+            <span className="block font-display text-sm font-bold leading-tight text-white">
               Community tree planting
             </span>
-            <span className="text-xs font-medium text-white/80">
-              Reforesting the Niger Delta
+            <span className="mt-0.5 block text-xs font-medium leading-snug text-white/85">
+              Restoring ecosystems for future generations
+            </span>
+          </span>
+
+          {/* Desktop: unchanged badge + caption */}
+          <span className="hidden items-center gap-3 lg:flex">
+            <span className="grid h-11 w-11 flex-none place-items-center rounded-xl bg-white/15 ring-1 ring-white/25 backdrop-blur-sm">
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" aria-hidden="true">
+                <path
+                  d="M20 4C11 4 4 9.5 4 17c0 1.2.2 2.3.5 3.3C6 14 11 10.5 17 9.5c-4.5 2-7.8 5.4-9.4 10.5.9.3 1.9.5 3 .5C18 20.5 20 12 20 4Z"
+                  fill="#8CC63F"
+                />
+              </svg>
+            </span>
+            <span className="flex flex-col leading-tight">
+              <span className="font-display text-sm font-bold text-white">
+                Community tree planting
+              </span>
+              <span className="text-xs font-medium text-white/80">
+                Reforesting the Niger Delta
+              </span>
             </span>
           </span>
         </figcaption>
