@@ -18,10 +18,22 @@ const sora = Sora({
 const SITE_NAME =
   "Tamarakuro Environmental and Sustainable Development Foundation";
 
+const FALLBACK_SITE_URL = "https://tesdef-website.vercel.app";
+
+function resolveSiteUrl(): URL {
+  const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (raw) {
+    try {
+      return new URL(raw);
+    } catch {
+      // fall through to the fallback below
+    }
+  }
+  return new URL(FALLBACK_SITE_URL);
+}
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://tesdef-website.vercel.app"
-  ),
+  metadataBase: resolveSiteUrl(),
   title: {
     default: `TESDEF — ${SITE_NAME}`,
     template: "%s | TESDEF",
