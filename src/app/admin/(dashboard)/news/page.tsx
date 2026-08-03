@@ -1,6 +1,7 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
 import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import { createNewsPost, deleteNewsPost } from "./actions";
@@ -26,8 +27,7 @@ export default async function AdminNewsPage() {
               <input name="category" placeholder="e.g. Environment" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-semibold text-forest">Cover image URL</label>
-              <input name="coverImage" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
+              <ImageUpload name="coverImage" label="Cover image" />
             </div>
             <div className="sm:col-span-2">
               <label className="mb-1 block text-sm font-semibold text-forest">Excerpt *</label>

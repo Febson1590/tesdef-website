@@ -49,3 +49,5 @@ next-env.d.ts
 # Prisma SQLite database files
 prisma/*.db
 prisma/*.db-journal
+
+.env*

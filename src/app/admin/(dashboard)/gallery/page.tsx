@@ -1,6 +1,7 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
 import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import { createGalleryItem, deleteGalleryItem } from "./actions";
@@ -26,8 +27,7 @@ export default async function AdminGalleryPage() {
               <input name="category" placeholder="e.g. Community" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div className="sm:col-span-2">
-              <label className="mb-1 block text-sm font-semibold text-forest">Image URL *</label>
-              <input name="url" required className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
+              <ImageUpload name="url" label="Image *" hint="An image is required for a gallery item." />
             </div>
             <div className="sm:col-span-2">
               <label className="mb-1 block text-sm font-semibold text-forest">Caption</label>

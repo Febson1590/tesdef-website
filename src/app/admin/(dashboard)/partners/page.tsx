@@ -1,6 +1,7 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
 import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { prisma } from "@/lib/prisma";
 import { createPartner, deletePartner } from "./actions";
 
@@ -35,8 +36,7 @@ export default async function AdminPartnersPage() {
               <input name="website" type="url" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-semibold text-forest">Logo URL</label>
-              <input name="logo" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
+              <ImageUpload name="logo" label="Logo" />
             </div>
             <div className="sm:col-span-2">
               <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add (as draft)</button>

@@ -1,6 +1,7 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
 import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import { createProject, deleteProject } from "./actions";
@@ -48,8 +49,7 @@ export default async function AdminProjectsPage() {
               <input name="location" className={inputCls} />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-semibold text-forest">Cover image URL</label>
-              <input name="coverImage" className={inputCls} />
+              <ImageUpload name="coverImage" label="Cover image" />
             </div>
             <div>
               <label className="mb-1 block text-sm font-semibold text-forest">Programme</label>
