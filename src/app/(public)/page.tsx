@@ -3,9 +3,10 @@ import { Hero } from "@/components/Hero";
 import { IntroSection } from "@/components/sections/IntroSection";
 import { ProgrammesSection } from "@/components/sections/ProgrammesSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
+import { ImpactSection } from "@/components/sections/ImpactSection";
 import { NewsSection } from "@/components/sections/NewsSection";
 import { GetInvolvedSection } from "@/components/sections/GetInvolvedSection";
+import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
 import { TrustSection } from "@/components/sections/TrustSection";
 import { PartnersSection } from "@/components/sections/PartnersSection";
 
@@ -23,15 +24,16 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <Hero />
-      <IntroSection />
-      <ProgrammesSection />
-      <ProjectsSection />
-      <HowItWorksSection />
-      <NewsSection />
-      <GetInvolvedSection />
-      <TrustSection />
-      <PartnersSection />
+      {/* 1 */}   <Hero />
+      {/* 2 */}   <IntroSection />          {/* About TESDEF */}
+      {/* 3 */}   <ProgrammesSection />     {/* Programme Areas */}
+      {/* 4 */}   <ProjectsSection />       {/* Featured Projects / Initiatives */}
+      {/* 5 */}   <ImpactSection />         {/* Impact */}
+      {/* 6 */}   <NewsSection />           {/* Latest News */}
+      {/* 7 */}   <GetInvolvedSection />    {/* Get Involved + Support TESDEF */}
+      {/* + */}   <HowItWorksSection />     {/* How TESDEF works */}
+      {/* + */}   <TrustSection />          {/* Accountability & transparency */}
+      {/* 8 */}   <PartnersSection />       {/* Partners (hidden when none) */}
     </>
   );
 }

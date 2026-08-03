@@ -4,6 +4,11 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { prisma } from "@/lib/prisma";
 
+// Featured homepage initiatives — fully admin-controlled.
+//   • only status = "published"
+//   • only featured = true ("Feature on Homepage")
+//   • ordered by display order, then most recent
+//   • max 3
 async function getFeatured() {
   try {
     return await prisma.project.findMany({
@@ -20,10 +25,6 @@ async function getFeatured() {
 export async function ProjectsSection() {
   const projects = await getFeatured();
 
-  // Homepage featured section is admin-controlled. Hide it entirely when no
-  // featured, published initiatives exist — never show fake/placeholder cards.
-  if (projects.length === 0) return null;
-
   return (
     <section aria-labelledby="projects-heading" className="bg-offwhite py-16 sm:py-20 lg:py-24">
       <Container>
@@ -32,7 +33,7 @@ export async function ProjectsSection() {
             id="projects-heading"
             label="Our work"
             title="Featured initiatives"
-            subtitle="A closer look at initiatives from across TESDEF's programme areas."
+            subtitle="Projects and community initiatives from across TESDEF's programme areas."
             align="left"
           />
           <Link href="/projects" className="flex-none text-sm font-semibold text-primary hover:text-forest">
@@ -40,20 +41,27 @@ export async function ProjectsSection() {
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p) => (
-            <ProjectCard
-              key={p.id}
-              title={p.title}
-              summary={p.summary}
-              coverImage={p.coverImage}
-              slug={p.slug}
-              programmeName={p.programme?.title ?? "TESDEF"}
-              programmeSlug={p.programme?.slug ?? ""}
-              type={p.type}
-            />
-          ))}
-        </div>
+        {projects.length === 0 ? (
+          <p className="mt-10 rounded-2xl border border-black/5 bg-white p-10 text-center text-muted">
+            Projects and community initiatives approved by TESDEF will appear here as they are published.
+          </p>
+        ) : (
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {projects.map((p) => (
+              <ProjectCard
+                key={p.id}
+                title={p.title}
+                summary={p.summary}
+                coverImage={p.coverImage}
+                slug={p.slug}
+                programmeName={p.programme?.title ?? "TESDEF"}
+                programmeSlug={p.programme?.slug ?? ""}
+                type={p.type}
+                status={p.status}
+              />
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );
