@@ -80,11 +80,11 @@ export const FOCUS_AREAS = [
 // confirmed" and are HIDDEN on the public site. Add values only once the client
 // confirms them — no component code changes are required.
 export const CONTACT = {
-  email: "", // e.g. "info@tesdef.org" once confirmed
+  email: "", // general enquiries email — add once confirmed
   partnershipsEmail: "",
   mediaEmail: "",
   phone: "",
-  address: "", // e.g. "Delta State, Nigeria" once confirmed
+  address: "", // office/location — add once confirmed
   socials: {
     x: "",
     facebook: "",
