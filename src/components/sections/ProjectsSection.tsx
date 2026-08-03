@@ -4,16 +4,15 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { prisma } from "@/lib/prisma";
 
-// Featured homepage initiatives — fully admin-controlled.
-//   • only status = "published"
-//   • only featured = true ("Feature on Homepage")
-//   • ordered by display order, then most recent
-//   • max 3
+// Homepage initiatives — every published project/initiative appears automatically.
+//   • status = "published" only (drafts/unpublished/archived stay hidden)
+//   • newest first
+//   • the latest 3
 async function getFeatured() {
   try {
     return await prisma.project.findMany({
-      where: { status: "published", featured: true },
-      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+      where: { status: "published" },
+      orderBy: { createdAt: "desc" },
       take: 3,
       include: { programme: { select: { title: true, slug: true } } },
     });
@@ -33,7 +32,7 @@ export async function ProjectsSection() {
             id="projects-heading"
             label="Our work"
             title="Featured initiatives"
-            subtitle="Projects and community initiatives from across TESDEF's programme areas."
+            subtitle="The latest projects and community initiatives from across TESDEF's programme areas."
             align="left"
           />
           <Link href="/projects" className="flex-none text-sm font-semibold text-primary hover:text-forest">

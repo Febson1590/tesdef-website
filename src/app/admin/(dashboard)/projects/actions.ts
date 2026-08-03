@@ -33,13 +33,13 @@ export async function createProject(formData: FormData) {
     },
   });
   revalidatePath("/admin/projects");
-  revalidatePath("/projects");
+  // Revalidate every public route that can show projects (home, /projects, programme pages).
+  revalidatePath("/", "layout");
 }
 
 export async function deleteProject(id: string) {
   await requireSession();
   await prisma.project.delete({ where: { id } });
   revalidatePath("/admin/projects");
-  revalidatePath("/projects");
-  revalidatePath("/");
+  revalidatePath("/", "layout");
 }
