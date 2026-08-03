@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ORG, CORE_VALUES, FOCUS_AREAS, TEAM } from "@/lib/data";
+import { ORG, CORE_VALUES, FOCUS_AREAS } from "@/lib/data";
+import { prisma } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "About TESDEF",
@@ -10,8 +13,16 @@ export const metadata: Metadata = {
     "About the Tamarakuro Environmental and Sustainable Development Foundation (TESDEF) — our vision, mission, purpose, core values and areas of focus.",
 };
 
-export default function AboutPage() {
-  const team = TEAM.filter((m) => m.published);
+async function getTeam() {
+  try {
+    return await prisma.teamMember.findMany({ where: { status: "published" }, orderBy: { order: "asc" } });
+  } catch {
+    return [];
+  }
+}
+
+export default async function AboutPage() {
+  const team = await getTeam();
 
   return (
     <>

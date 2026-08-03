@@ -29,10 +29,10 @@ export default async function NewsDetailPage({ params }: Props) {
   let related: { id: string; slug: string; title: string; publishedAt: Date | null; createdAt: Date }[] = [];
 
   try {
-    post = await prisma.newsPost.findUnique({ where: { slug, published: true } });
+    post = await prisma.newsPost.findUnique({ where: { slug, status: "published" } });
     if (!post) notFound();
     const others = await prisma.newsPost.findMany({
-      where: { published: true, slug: { not: slug } },
+      where: { status: "published", slug: { not: slug } },
       orderBy: { publishedAt: "desc" },
       take: 2,
       select: { id: true, slug: true, title: true, publishedAt: true, createdAt: true },

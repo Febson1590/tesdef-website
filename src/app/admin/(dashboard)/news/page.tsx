@@ -1,5 +1,6 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
+import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import { createNewsPost, deleteNewsPost } from "./actions";
@@ -37,7 +38,8 @@ export default async function AdminNewsPage() {
               <textarea name="content" rows={6} className="w-full resize-none rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div className="sm:col-span-2">
-              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Publish post</button>
+              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add (as draft)</button>
+              <p className="mt-2 text-xs text-muted">New posts are created as Draft. Use Publish to make them public.</p>
             </div>
           </form>
         </section>
@@ -49,12 +51,16 @@ export default async function AdminNewsPage() {
             columns={[
               { key: "title", label: "Title" },
               { key: "category", label: "Category" },
-              { key: "publishedAt", label: "Published", render: (r) => formatDate(r.publishedAt as Date) },
+              { key: "status", label: "Status", render: (r) => <StatusBadge status={String(r.status)} /> },
+              { key: "publishedAt", label: "Date", render: (r) => formatDate(r.publishedAt as Date) },
               {
                 key: "actions", label: "", render: (r) => (
-                  <form action={deleteNewsPost.bind(null, r.id as string)}>
-                    <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
-                  </form>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <AdminRowActions model="newsPost" id={r.id as string} status={String(r.status)} adminPath="/admin/news" />
+                    <form action={deleteNewsPost.bind(null, r.id as string)}>
+                      <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
+                    </form>
+                  </div>
                 ),
               },
             ]}

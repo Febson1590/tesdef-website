@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { EventCard } from "@/components/ui/EventCard";
 import { prisma } from "@/lib/prisma";
-import { EVENTS } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
@@ -13,16 +12,9 @@ export const metadata: Metadata = {
 
 async function getEvents() {
   try {
-    return await prisma.event.findMany({ where: { published: true }, orderBy: { startDate: "asc" } });
+    return await prisma.event.findMany({ where: { status: "published" }, orderBy: { startDate: "asc" } });
   } catch {
-    return EVENTS.filter((e) => e.published).map((e) => ({
-      ...e,
-      startDate: new Date(e.startDate),
-      endDate: e.endDate ? new Date(e.endDate) : null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      excerpt: "",
-    }));
+    return [];
   }
 }
 

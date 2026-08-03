@@ -1,24 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ProgressBar } from "./ProgressBar";
 import { Badge } from "./Badge";
-import { formatCurrency, progressPercent } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
-const STATUS_LABEL: Record<string, string> = {
-  proposed: "Proposed",
-  active: "Active",
-  completed: "Completed",
-  planning: "Planning",
-  paused: "Paused",
-};
-
-const STATUS_VARIANT: Record<string, "success" | "warning" | "info" | "default"> = {
-  proposed: "default",
-  active: "success",
-  completed: "info",
-  planning: "warning",
-  paused: "default",
+// Card badge reflects the record TYPE (not its publishing status).
+const TYPE_LABEL: Record<string, string> = {
+  project: "Project",
+  initiative: "Initiative",
+  campaign: "Campaign",
 };
 
 type Props = {
@@ -28,10 +17,7 @@ type Props = {
   slug: string;
   programmeName: string;
   programmeSlug: string;
-  fundingGoal: number;
-  amountRaised: number;
-  supporterCount: number;
-  status: string;
+  type?: string;
   className?: string;
 };
 
@@ -42,13 +28,10 @@ export function ProjectCard({
   slug,
   programmeName,
   programmeSlug,
-  fundingGoal,
-  amountRaised,
-  supporterCount,
-  status,
+  type,
   className,
 }: Props) {
-  const pct = progressPercent(amountRaised, fundingGoal);
+  const typeLabel = type ? TYPE_LABEL[type] : undefined;
 
   return (
     <article
@@ -69,11 +52,11 @@ export function ProjectCard({
         ) : (
           <div className="h-full bg-gradient-to-br from-mint to-fresh/20" />
         )}
-        <div className="absolute left-3 top-3 flex flex-wrap gap-2">
-          <Badge variant={STATUS_VARIANT[status] ?? "default"}>
-            {STATUS_LABEL[status] ?? status}
-          </Badge>
-        </div>
+        {typeLabel && (
+          <div className="absolute left-3 top-3">
+            <Badge variant="default">{typeLabel}</Badge>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-5">
@@ -85,35 +68,19 @@ export function ProjectCard({
         </Link>
 
         <h3 className="mt-2 font-display text-lg font-bold leading-snug text-forest">
-          <Link
-            href={`/projects/${slug}`}
-            className="hover:text-primary"
-          >
+          <Link href={`/projects/${slug}`} className="hover:text-primary">
             {title}
           </Link>
         </h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
-          {summary.slice(0, 120)}…
+          {summary.length > 120 ? `${summary.slice(0, 120)}…` : summary}
         </p>
-
-        {fundingGoal > 0 && (
-          <div className="mt-4">
-            <ProgressBar percent={pct} />
-            <div className="mt-2 flex items-center justify-between text-xs text-muted">
-              <span>
-                <span className="font-semibold text-forest">{formatCurrency(amountRaised)}</span>
-                {" "}raised of {formatCurrency(fundingGoal)}
-              </span>
-              <span>{supporterCount.toLocaleString()} supporters</span>
-            </div>
-          </div>
-        )}
 
         <Link
           href={`/projects/${slug}`}
           className="mt-5 inline-flex items-center justify-center rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-mint"
         >
-          View project
+          View initiative
         </Link>
       </div>
     </article>

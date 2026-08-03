@@ -13,6 +13,9 @@ generator client {
 }
 
 // ─── Content models ───────────────────────────────────────────────────────────
+// Unified visibility: `status` is the single source of truth.
+//   status: "draft" | "published" | "archived"
+// Only status = "published" records are shown on the public website.
 
 model Programme {
   id          String    @id @default(cuid())
@@ -23,7 +26,7 @@ model Programme {
   icon        String    @default("")
   colour      String    @default("primary")
   order       Int       @default(0)
-  published   Boolean   @default(true)
+  status      String    @default("draft")
   projects    Project[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -45,10 +48,13 @@ model Project {
   fundingGoal    Float            @default(0)
   amountRaised   Float            @default(0)
   supporterCount Int              @default(0)
+  // type describes what the record is (not its publishing state):
+  //   "project" | "initiative" | "campaign"
+  type           String           @default("initiative")
   status         String           @default("draft")
+  featured       Boolean          @default(false)
+  order          Int              @default(0)
   howFundsUsed   String           @default("[]")
-  isSample       Boolean          @default(false)
-  published      Boolean          @default(false)
   images         ProjectImage[]
   updates        ProjectUpdate[]
   donations      DonationRecord[]
@@ -85,8 +91,7 @@ model NewsPost {
   category    String    @default("")
   tags        String    @default("[]")
   status      String    @default("draft")
-  isSample    Boolean   @default(false)
-  published   Boolean   @default(false)
+  featured    Boolean   @default(false)
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -105,8 +110,7 @@ model Event {
   endDate          DateTime?
   registrationLink String    @default("")
   status           String    @default("draft")
-  isSample         Boolean   @default(false)
-  published        Boolean   @default(false)
+  featured         Boolean   @default(false)
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
 }
@@ -119,7 +123,7 @@ model GalleryItem {
   category  String   @default("")
   alt       String   @default("")
   order     Int      @default(0)
-  published Boolean  @default(true)
+  status    String   @default("draft")
   createdAt DateTime @default(now())
 }
 
@@ -131,6 +135,7 @@ model ImpactStat {
   suffix      String   @default("")
   icon        String   @default("")
   order       Int      @default(0)
+  status      String   @default("draft")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -143,7 +148,7 @@ model Testimonial {
   location  String   @default("")
   image     String   @default("")
   order     Int      @default(0)
-  published Boolean  @default(true)
+  status    String   @default("draft")
   createdAt DateTime @default(now())
 }
 
@@ -154,7 +159,7 @@ model TeamMember {
   bio       String   @default("")
   image     String   @default("")
   order     Int      @default(0)
-  published Boolean  @default(true)
+  status    String   @default("draft")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -166,24 +171,27 @@ model Partner {
   website   String   @default("")
   category  String   @default("")
   order     Int      @default(0)
-  published Boolean  @default(true)
+  status    String   @default("draft")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 // ─── Forms / enquiries ────────────────────────────────────────────────────────
 
+// Support-interest submissions (no live payment processing).
 model DonationRecord {
-  id        String   @id @default(cuid())
-  amount    Float
-  currency  String   @default("NGN")
-  name      String   @default("")
-  email     String   @default("")
-  message   String   @default("")
-  project   Project? @relation(fields: [projectId], references: [id])
-  projectId String?
-  status    String   @default("pending")
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  amount      Float    @default(0)
+  currency    String   @default("NGN")
+  name        String   @default("")
+  email       String   @default("")
+  country     String   @default("")
+  supportType String   @default("")
+  message     String   @default("")
+  project     Project? @relation(fields: [projectId], references: [id])
+  projectId   String?
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
 }
 
 model VolunteerApplication {

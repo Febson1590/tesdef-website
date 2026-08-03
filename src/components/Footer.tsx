@@ -24,7 +24,7 @@ const LINKS = [
   {
     heading: "Work",
     items: [
-      { label: "Proposed Initiatives", href: "/projects" },
+      { label: "Initiatives", href: "/projects" },
       { label: "News & Updates", href: "/news" },
       { label: "Events", href: "/events" },
     ],

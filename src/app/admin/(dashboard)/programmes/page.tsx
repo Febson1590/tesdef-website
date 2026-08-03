@@ -1,5 +1,6 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
+import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import { createProgramme, deleteProgramme } from "./actions";
@@ -34,7 +35,8 @@ export default async function AdminProgrammesPage() {
               <textarea name="description" rows={3} className="w-full resize-none rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div className="sm:col-span-2">
-              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add programme</button>
+              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add (as draft)</button>
+              <p className="mt-2 text-xs text-muted">New programmes are created as Draft. Use Publish to make them public.</p>
             </div>
           </form>
         </section>
@@ -47,12 +49,16 @@ export default async function AdminProgrammesPage() {
             columns={[
               { key: "title", label: "Title" },
               { key: "tagline", label: "Tagline" },
+              { key: "status", label: "Status", render: (r) => <StatusBadge status={String(r.status)} /> },
               { key: "createdAt", label: "Created", render: (r) => formatDate(r.createdAt as Date) },
               {
                 key: "actions", label: "", render: (r) => (
-                  <form action={deleteProgramme.bind(null, r.id as string)}>
-                    <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
-                  </form>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <AdminRowActions model="programme" id={r.id as string} status={String(r.status)} adminPath="/admin/programmes" />
+                    <form action={deleteProgramme.bind(null, r.id as string)}>
+                      <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
+                    </form>
+                  </div>
                 ),
               },
             ]}

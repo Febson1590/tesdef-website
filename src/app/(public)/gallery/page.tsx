@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Container } from "@/components/Container";
 import { prisma } from "@/lib/prisma";
-import { GALLERY_ITEMS } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
@@ -13,11 +12,9 @@ export const metadata: Metadata = {
 
 async function getGalleryItems() {
   try {
-    return await prisma.galleryItem.findMany({ where: { published: true }, orderBy: { order: "asc" } });
+    return await prisma.galleryItem.findMany({ where: { status: "published" }, orderBy: { order: "asc" } });
   } catch {
-    return GALLERY_ITEMS.filter((g) => g.published)
-      .sort((a, b) => a.order - b.order)
-      .map((g) => ({ ...g, createdAt: new Date(), title: "" }));
+    return [];
   }
 }
 

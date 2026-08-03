@@ -25,7 +25,7 @@ export default async function EventDetailPage({ params }: Props) {
 
   let ev;
   try {
-    ev = await prisma.event.findUnique({ where: { slug, published: true } });
+    ev = await prisma.event.findUnique({ where: { slug, status: "published" } });
     if (!ev) notFound();
   } catch {
     notFound();

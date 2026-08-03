@@ -24,17 +24,17 @@ export default async function ProgrammeDetailPage({ params }: Props) {
   const { slug } = await params;
 
   let programme;
-  let projects: { id: string; title: string; summary: string; coverImage: string; slug: string; fundingGoal: number; amountRaised: number; supporterCount: number; status: string; programme: { title: string; slug: string } | null }[] = [];
+  let projects: { id: string; title: string; summary: string; coverImage: string; slug: string; type: string; programme: { title: string; slug: string } | null }[] = [];
 
   try {
     programme = await prisma.programme.findUnique({
-      where: { slug, published: true },
+      where: { slug, status: "published" },
     });
     if (!programme) notFound();
 
     const raw = await prisma.project.findMany({
-      where: { programmeId: programme.id, published: true },
-      orderBy: { createdAt: "desc" },
+      where: { programmeId: programme.id, status: "published" },
+      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
       include: { programme: { select: { title: true, slug: true } } },
     });
     projects = raw;
@@ -78,10 +78,7 @@ export default async function ProgrammeDetailPage({ params }: Props) {
                   slug={p.slug}
                   programmeName={p.programme?.title ?? programme!.title}
                   programmeSlug={p.programme?.slug ?? slug}
-                  fundingGoal={p.fundingGoal}
-                  amountRaised={p.amountRaised}
-                  supporterCount={p.supporterCount}
-                  status={p.status}
+                  type={p.type}
                 />
               ))}
             </div>
@@ -96,7 +93,7 @@ export default async function ProgrammeDetailPage({ params }: Props) {
               <h2 className="font-display text-xl font-bold text-forest">Support this programme</h2>
               <p className="mt-1 text-sm text-muted">Your support helps TESDEF advance its work in this area.</p>
             </div>
-            <Button href="/donate" variant="primary" size="lg">Donate</Button>
+            <Button href="/get-involved" variant="primary" size="lg">Get involved</Button>
           </div>
         </Container>
       </section>

@@ -113,8 +113,8 @@ export function Hero() {
               <path d="M12 11.5v.01" />
             </svg>
             <p className="max-w-md text-sm leading-relaxed text-muted">
-              Rooted in Gbaramatu Kingdom and the Niger Delta — working with
-              communities across Nigeria and beyond.
+              Working with communities to advance sustainability, innovation and
+              inclusive development.
             </p>
           </div>
         </div>

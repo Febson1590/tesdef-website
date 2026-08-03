@@ -2,14 +2,9 @@
 
 import { useState } from "react";
 import { Container } from "@/components/Container";
+import { PROGRAMME_CATEGORIES } from "@/lib/data";
 
-const PROGRAMME_INTERESTS = [
-  "Environmental Sustainability & Climate Resilience",
-  "Youth Empowerment & Education",
-  "Digital Innovation & Inclusion",
-  "Community Development & Sustainable Livelihoods",
-  "Advocacy, Research & Strategic Partnerships",
-];
+const PROGRAMME_INTERESTS = PROGRAMME_CATEGORIES;
 
 const MAX = { name: 120, email: 160, phone: 40, skills: 300, message: 4000 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -108,7 +103,7 @@ export default function VolunteerPage() {
                   <label htmlFor="vol-phone" className="mb-1.5 block text-sm font-semibold text-forest">Phone number</label>
                   <input id="vol-phone" name="phone" type="tel" maxLength={MAX.phone} autoComplete="tel"
                     value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                    className={inputCls} placeholder="Optional" />
+                    className={inputCls} placeholder="+[country code] phone number" />
                 </div>
                 <div>
                   <label htmlFor="vol-skills" className="mb-1.5 block text-sm font-semibold text-forest">Your skills and expertise</label>

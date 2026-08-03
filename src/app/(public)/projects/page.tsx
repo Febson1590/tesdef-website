@@ -2,34 +2,23 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { prisma } from "@/lib/prisma";
-import { PROJECTS, PROGRAMMES } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Proposed Initiatives",
-  description: "Proposed initiatives across TESDEF's areas of focus — environmental sustainability, community development, digital innovation, youth empowerment, and advocacy.",
+  title: "Initiatives",
+  description: "Initiatives across TESDEF's areas of focus — environmental sustainability, community development, digital innovation, youth empowerment, and advocacy.",
 };
 
 async function getProjects() {
   try {
     return await prisma.project.findMany({
-      where: { published: true },
-      orderBy: { createdAt: "desc" },
+      where: { status: "published" },
+      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
       include: { programme: { select: { title: true, slug: true } } },
     });
   } catch {
-    return PROJECTS.filter((p) => p.published).map((p) => {
-      const prog = PROGRAMMES.find((pr) => pr.id === p.programmeId);
-      return {
-        ...p,
-        startDate: p.startDate ? new Date(p.startDate) : null,
-        endDate: null as Date | null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        programme: prog ? { title: prog.title, slug: prog.slug } : null,
-      };
-    });
+    return [];
   }
 }
 
@@ -42,10 +31,9 @@ export default async function ProjectsPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">Our work</p>
-            <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Proposed Initiatives</h1>
+            <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Initiatives</h1>
             <p className="mt-5 text-lg leading-relaxed text-white/70">
-              These proposed initiatives reflect the areas TESDEF intends to develop. Final project
-              details, locations, timelines and delivery plans will be published following approval.
+              Initiatives across TESDEF&apos;s programme areas. Details are published as initiatives are approved.
             </p>
           </div>
         </Container>
@@ -54,8 +42,8 @@ export default async function ProjectsPage() {
       <section className="bg-white py-16">
         <Container>
           {projects.length === 0 ? (
-            <p className="rounded-2xl border border-black/5 bg-offwhite p-12 text-center text-muted">
-              Our projects and programme activities will be published here as they are officially launched.
+            <p className="mx-auto max-w-2xl rounded-2xl border border-black/5 bg-offwhite p-12 text-center text-muted">
+              New initiatives will be published here as they are approved.
             </p>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -68,10 +56,7 @@ export default async function ProjectsPage() {
                   slug={p.slug}
                   programmeName={p.programme?.title ?? "TESDEF"}
                   programmeSlug={p.programme?.slug ?? ""}
-                  fundingGoal={p.fundingGoal}
-                  amountRaised={p.amountRaised}
-                  supporterCount={p.supporterCount}
-                  status={p.status}
+                  type={p.type}
                 />
               ))}
             </div>

@@ -3,33 +3,26 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { prisma } from "@/lib/prisma";
-import { PROJECTS, PROGRAMMES } from "@/lib/data";
 
-async function getProjects() {
+async function getFeatured() {
   try {
     return await prisma.project.findMany({
-      where: { published: true },
-      orderBy: { createdAt: "desc" },
+      where: { status: "published", featured: true },
+      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
       take: 3,
       include: { programme: { select: { title: true, slug: true } } },
     });
   } catch {
-    return PROJECTS.filter((p) => p.published).slice(0, 3).map((p) => {
-      const prog = PROGRAMMES.find((pr) => pr.id === p.programmeId);
-      return {
-        ...p,
-        startDate: p.startDate ? new Date(p.startDate) : null,
-        endDate: null as Date | null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        programme: prog ? { title: prog.title, slug: prog.slug } : null,
-      };
-    });
+    return [];
   }
 }
 
 export async function ProjectsSection() {
-  const projects = await getProjects();
+  const projects = await getFeatured();
+
+  // Homepage featured section is admin-controlled. Hide it entirely when no
+  // featured, published initiatives exist — never show fake/placeholder cards.
+  if (projects.length === 0) return null;
 
   return (
     <section aria-labelledby="projects-heading" className="bg-offwhite py-16 sm:py-20 lg:py-24">
@@ -38,8 +31,8 @@ export async function ProjectsSection() {
           <SectionHeading
             id="projects-heading"
             label="Our work"
-            title="Proposed initiatives"
-            subtitle="Areas TESDEF intends to develop. Final project details will be published following approval."
+            title="Featured initiatives"
+            subtitle="A closer look at initiatives from across TESDEF's programme areas."
             align="left"
           />
           <Link href="/projects" className="flex-none text-sm font-semibold text-primary hover:text-forest">
@@ -47,29 +40,20 @@ export async function ProjectsSection() {
           </Link>
         </div>
 
-        {projects.length === 0 ? (
-          <p className="mt-10 rounded-2xl border border-black/5 bg-white p-10 text-center text-muted">
-            Our projects and programme activities will be published here as they are officially launched.
-          </p>
-        ) : (
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p) => (
-              <ProjectCard
-                key={p.id}
-                title={p.title}
-                summary={p.summary}
-                coverImage={p.coverImage}
-                slug={p.slug}
-                programmeName={p.programme?.title ?? "TESDEF"}
-                programmeSlug={p.programme?.slug ?? ""}
-                fundingGoal={p.fundingGoal}
-                amountRaised={p.amountRaised}
-                supporterCount={p.supporterCount}
-                status={p.status}
-              />
-            ))}
-          </div>
-        )}
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {projects.map((p) => (
+            <ProjectCard
+              key={p.id}
+              title={p.title}
+              summary={p.summary}
+              coverImage={p.coverImage}
+              slug={p.slug}
+              programmeName={p.programme?.title ?? "TESDEF"}
+              programmeSlug={p.programme?.slug ?? ""}
+              type={p.type}
+            />
+          ))}
+        </div>
       </Container>
     </section>
   );

@@ -1,5 +1,6 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
+import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
 import { prisma } from "@/lib/prisma";
 import { createTeamMember, deleteTeamMember } from "./actions";
 
@@ -32,7 +33,8 @@ export default async function AdminTeamPage() {
               <textarea name="bio" rows={3} className="w-full resize-none rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div className="sm:col-span-2">
-              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add member</button>
+              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add (as draft)</button>
+              <p className="mt-2 text-xs text-muted">New members are created as Draft. Use Publish to make them public.</p>
             </div>
           </form>
         </section>
@@ -44,12 +46,15 @@ export default async function AdminTeamPage() {
             columns={[
               { key: "name", label: "Name" },
               { key: "role", label: "Role" },
-              { key: "bio", label: "Bio", render: (r) => String(r.bio ?? "").slice(0, 60) + (String(r.bio ?? "").length > 60 ? "…" : "") },
+              { key: "status", label: "Status", render: (r) => <StatusBadge status={String(r.status)} /> },
               {
                 key: "actions", label: "", render: (r) => (
-                  <form action={deleteTeamMember.bind(null, r.id as string)}>
-                    <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
-                  </form>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <AdminRowActions model="teamMember" id={r.id as string} status={String(r.status)} adminPath="/admin/team" />
+                    <form action={deleteTeamMember.bind(null, r.id as string)}>
+                      <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
+                    </form>
+                  </div>
                 ),
               },
             ]}

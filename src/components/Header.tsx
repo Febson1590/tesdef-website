@@ -71,7 +71,7 @@ export function Header() {
               size="sm"
               className="h-9 px-3.5 text-xs lg:px-4 lg:text-sm"
             >
-              Donate
+              Support
             </Button>
 
             {/* Mobile menu toggle */}
@@ -140,7 +140,7 @@ export function Header() {
               size="lg"
               className="mt-2 w-full"
             >
-              Donate
+              Support
             </Button>
           </nav>
         </Container>

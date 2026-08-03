@@ -1,5 +1,6 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
+import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
 import { prisma } from "@/lib/prisma";
 import { createPartner, deletePartner } from "./actions";
 
@@ -38,7 +39,8 @@ export default async function AdminPartnersPage() {
               <input name="logo" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div className="sm:col-span-2">
-              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add partner</button>
+              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add (as draft)</button>
+              <p className="mt-2 text-xs text-muted">New partners are created as Draft. Use Publish to make them public.</p>
             </div>
           </form>
         </section>
@@ -50,12 +52,16 @@ export default async function AdminPartnersPage() {
             columns={[
               { key: "name", label: "Name" },
               { key: "category", label: "Category" },
+              { key: "status", label: "Status", render: (r) => <StatusBadge status={String(r.status)} /> },
               { key: "website", label: "Website" },
               {
                 key: "actions", label: "", render: (r) => (
-                  <form action={deletePartner.bind(null, r.id as string)}>
-                    <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
-                  </form>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <AdminRowActions model="partner" id={r.id as string} status={String(r.status)} adminPath="/admin/partners" />
+                    <form action={deletePartner.bind(null, r.id as string)}>
+                      <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
+                    </form>
+                  </div>
                 ),
               },
             ]}

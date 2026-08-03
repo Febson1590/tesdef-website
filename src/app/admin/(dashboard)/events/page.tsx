@@ -1,5 +1,6 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
+import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
 import { prisma } from "@/lib/prisma";
 import { formatDate } from "@/lib/utils";
 import { createEvent, deleteEvent } from "./actions";
@@ -45,7 +46,8 @@ export default async function AdminEventsPage() {
               <textarea name="description" rows={4} className="w-full resize-none rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div className="sm:col-span-2">
-              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Create event</button>
+              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add (as draft)</button>
+              <p className="mt-2 text-xs text-muted">New events are created as Draft. Use Publish to make them public.</p>
             </div>
           </form>
         </section>
@@ -57,12 +59,16 @@ export default async function AdminEventsPage() {
             columns={[
               { key: "title", label: "Title" },
               { key: "location", label: "Location" },
+              { key: "status", label: "Status", render: (r) => <StatusBadge status={String(r.status)} /> },
               { key: "startDate", label: "Date", render: (r) => formatDate(r.startDate as Date) },
               {
                 key: "actions", label: "", render: (r) => (
-                  <form action={deleteEvent.bind(null, r.id as string)}>
-                    <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
-                  </form>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <AdminRowActions model="event" id={r.id as string} status={String(r.status)} adminPath="/admin/events" />
+                    <form action={deleteEvent.bind(null, r.id as string)}>
+                      <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
+                    </form>
+                  </div>
                 ),
               },
             ]}

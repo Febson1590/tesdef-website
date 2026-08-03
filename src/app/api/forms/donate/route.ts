@@ -1,20 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
+// Support-interest submissions (no live payment processing).
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { amount, projectId, name, email, message } = body as { amount: number; projectId?: string; name?: string; email?: string; message?: string };
-    if (!amount || amount < 100) {
-      return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
+    const { name, email, country, supportType, message } = body as {
+      name?: string;
+      email?: string;
+      country?: string;
+      supportType?: string;
+      message?: string;
+    };
+    if (!name || !email) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
     await prisma.donationRecord.create({
       data: {
-        amount,
-        name: name ?? "",
-        email: email ?? "",
+        name,
+        email,
+        country: country ?? "",
+        supportType: supportType ?? "",
         message: message ?? "",
-        projectId: projectId || null,
         status: "pending",
       },
     });

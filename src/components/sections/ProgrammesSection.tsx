@@ -3,21 +3,23 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProgrammeCard } from "@/components/ui/ProgrammeCard";
 import { prisma } from "@/lib/prisma";
-import { PROGRAMMES } from "@/lib/data";
 
 async function getProgrammes() {
   try {
     return await prisma.programme.findMany({
-      where: { published: true },
+      where: { status: "published" },
       orderBy: { order: "asc" },
     });
   } catch {
-    return PROGRAMMES.filter((p) => p.published);
+    return [];
   }
 }
 
 export async function ProgrammesSection() {
   const programmes = await getProgrammes();
+
+  // Hide the section entirely if no published programmes exist.
+  if (programmes.length === 0) return null;
 
   return (
     <section aria-labelledby="programmes-heading" className="bg-white py-16 sm:py-20 lg:py-24">
@@ -25,8 +27,8 @@ export async function ProgrammesSection() {
         <SectionHeading
           id="programmes-heading"
           label="What we do"
-          title="Five areas, one mission"
-          subtitle="TESDEF works across five interconnected programmes spanning environmental sustainability, youth empowerment, digital innovation, community development, and advocacy."
+          title="Our programme areas"
+          subtitle="TESDEF works across interconnected programmes spanning environmental sustainability, youth empowerment, digital innovation, community development, and advocacy."
         />
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">

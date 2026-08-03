@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { NewsCard } from "@/components/ui/NewsCard";
 import { prisma } from "@/lib/prisma";
-import { NEWS } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
@@ -14,13 +13,11 @@ export const metadata: Metadata = {
 async function getNews() {
   try {
     return await prisma.newsPost.findMany({
-      where: { published: true },
+      where: { status: "published" },
       orderBy: { publishedAt: "desc" },
     });
   } catch {
-    return NEWS.filter((n) => n.published)
-      .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-      .map((n) => ({ ...n, publishedAt: n.publishedAt ? new Date(n.publishedAt) : new Date(), createdAt: new Date(), updatedAt: new Date(), tags: "[]" }));
+    return [];
   }
 }
 

@@ -3,23 +3,16 @@ import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { NewsCard } from "@/components/ui/NewsCard";
 import { prisma } from "@/lib/prisma";
-import { NEWS } from "@/lib/data";
 
 async function getLatestNews() {
   try {
     return await prisma.newsPost.findMany({
-      where: { published: true },
+      where: { status: "published" },
       orderBy: { publishedAt: "desc" },
       take: 3,
     });
   } catch {
-    return NEWS.filter((n) => n.published).slice(0, 3).map((n) => ({
-      ...n,
-      publishedAt: n.publishedAt ? new Date(n.publishedAt) : new Date(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      tags: "[]",
-    }));
+    return [];
   }
 }
 

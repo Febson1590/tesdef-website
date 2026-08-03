@@ -1,10 +1,10 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { prisma } from "@/lib/prisma";
-import { formatCurrency, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 
 async function getStats() {
-  const [programmes, projects, news, events, messages, volunteers, enquiries, donations] = await Promise.all([
+  const [programmes, projects, news, events, messages, volunteers, enquiries, support] = await Promise.all([
     prisma.programme.count(),
     prisma.project.count(),
     prisma.newsPost.count(),
@@ -14,8 +14,7 @@ async function getStats() {
     prisma.partnershipEnquiry.count({ where: { status: "pending" } }),
     prisma.donationRecord.findMany({ orderBy: { createdAt: "desc" }, take: 5 }),
   ]);
-  const totalDonations = await prisma.donationRecord.aggregate({ _sum: { amount: true } });
-  return { programmes, projects, news, events, messages, volunteers, enquiries, donations, totalDonations: totalDonations._sum.amount ?? 0 };
+  return { programmes, projects, news, events, messages, volunteers, enquiries, support };
 }
 
 const STAT_CARDS = [
@@ -65,28 +64,24 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        {/* Donations summary */}
+        {/* Support interest */}
         <div>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">Recent donations</h2>
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-muted">Recent support interest</h2>
             <Link href="/admin/donations" className="text-xs font-semibold text-primary hover:underline">View all →</Link>
           </div>
           <div className="rounded-xl border border-black/10 bg-white shadow-sm">
-            <div className="flex items-center justify-between border-b border-black/5 px-5 py-4">
-              <span className="text-sm font-medium text-muted">Total pledged (all time)</span>
-              <span className="font-display text-xl font-bold text-forest">{formatCurrency(stats.totalDonations)}</span>
-            </div>
-            {stats.donations.length === 0 ? (
-              <p className="px-5 py-8 text-center text-sm text-muted">No donations yet.</p>
+            {stats.support.length === 0 ? (
+              <p className="px-5 py-8 text-center text-sm text-muted">No support-interest submissions yet.</p>
             ) : (
               <ul className="divide-y divide-black/5">
-                {stats.donations.map((d) => (
+                {stats.support.map((d) => (
                   <li key={d.id} className="flex items-center justify-between px-5 py-3">
                     <div>
-                      <p className="text-sm font-medium text-ink">{d.name || "Anonymous"}</p>
+                      <p className="text-sm font-medium text-ink">{d.name || "—"}</p>
                       <p className="text-xs text-muted">{formatDate(d.createdAt)}</p>
                     </div>
-                    <span className="font-semibold text-primary">{formatCurrency(d.amount)}</span>
+                    <span className="text-xs font-medium text-muted">{d.supportType || "—"}</span>
                   </li>
                 ))}
               </ul>

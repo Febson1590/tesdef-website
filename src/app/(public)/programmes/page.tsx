@@ -2,23 +2,22 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ProgrammeCard } from "@/components/ui/ProgrammeCard";
 import { prisma } from "@/lib/prisma";
-import { PROGRAMMES } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Programmes",
-  description: "TESDEF's five programme areas — environmental sustainability, youth empowerment, digital inclusion, community development, and advocacy.",
+  description: "TESDEF's programme areas — environmental sustainability, youth empowerment, digital innovation, community development, and advocacy.",
 };
 
 async function getProgrammes() {
   try {
     return await prisma.programme.findMany({
-      where: { published: true },
+      where: { status: "published" },
       orderBy: { order: "asc" },
     });
   } catch {
-    return PROGRAMMES.filter((p) => p.published);
+    return [];
   }
 }
 
@@ -33,7 +32,7 @@ export default async function ProgrammesPage() {
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">What we do</p>
             <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">Our programmes</h1>
             <p className="mt-5 text-lg leading-relaxed text-white/70">
-              Five interconnected areas of work spanning environmental sustainability, youth empowerment, digital innovation, community development, and advocacy.
+              Interconnected areas of work spanning environmental sustainability, youth empowerment, digital innovation, community development, and advocacy.
             </p>
           </div>
         </Container>
@@ -41,11 +40,17 @@ export default async function ProgrammesPage() {
 
       <section className="bg-white py-16 sm:py-20">
         <Container>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {programmes.map((p) => (
-              <ProgrammeCard key={p.id} title={p.title} tagline={p.tagline} description={p.description} icon={p.icon} slug={p.slug} />
-            ))}
-          </div>
+          {programmes.length === 0 ? (
+            <p className="mx-auto max-w-2xl rounded-2xl border border-black/5 bg-offwhite p-12 text-center text-muted">
+              Our programme areas will be published here soon.
+            </p>
+          ) : (
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {programmes.map((p) => (
+                <ProgrammeCard key={p.id} title={p.title} tagline={p.tagline} description={p.description} icon={p.icon} slug={p.slug} />
+              ))}
+            </div>
+          )}
         </Container>
       </section>
     </>

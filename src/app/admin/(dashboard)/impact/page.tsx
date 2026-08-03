@@ -1,5 +1,6 @@
 import { AdminHeader } from "@/components/admin/AdminHeader";
 import { AdminTable } from "@/components/admin/AdminTable";
+import { AdminRowActions, StatusBadge } from "@/components/admin/AdminRowActions";
 import { prisma } from "@/lib/prisma";
 import { createImpactStat, deleteImpactStat } from "./actions";
 
@@ -32,7 +33,8 @@ export default async function AdminImpactPage() {
               <input name="description" className="w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none" />
             </div>
             <div className="sm:col-span-2">
-              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add stat</button>
+              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add (as draft)</button>
+              <p className="mt-2 text-xs text-muted">New stats are created as Draft. Use Publish to make them public.</p>
             </div>
           </form>
         </section>
@@ -44,12 +46,15 @@ export default async function AdminImpactPage() {
             columns={[
               { key: "label", label: "Label" },
               { key: "value", label: "Value" },
-              { key: "description", label: "Description" },
+              { key: "status", label: "Status", render: (r) => <StatusBadge status={String(r.status)} /> },
               {
                 key: "actions", label: "", render: (r) => (
-                  <form action={deleteImpactStat.bind(null, r.id as string)}>
-                    <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
-                  </form>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <AdminRowActions model="impactStat" id={r.id as string} status={String(r.status)} adminPath="/admin/impact" />
+                    <form action={deleteImpactStat.bind(null, r.id as string)}>
+                      <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
+                    </form>
+                  </div>
                 ),
               },
             ]}
