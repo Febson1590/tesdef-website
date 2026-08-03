@@ -38,7 +38,7 @@ export const ORG = {
     "The Foundation seeks to address pressing challenges such as environmental degradation, youth unemployment, poor waste management, climate change, and limited digital opportunities through innovative, community-led solutions.",
   ],
   founderName: "Tamarakuro Tonfawei",
-  founderTitle: "Founder",
+  founderTitle: "Founder & President",
   // Official founder's statement (client-supplied, verbatim).
   // DEVELOPER/ADMIN NOTE (do not surface publicly): the statement below contains
   // the phrase "Tonfawei Environmental and Sustainable Development Foundation",
@@ -85,15 +85,18 @@ export const PROGRAMME_CATEGORIES = [
 ] as const;
 
 // ─── Contact configuration ──────────────────────────────────────────────────
-// Verified contact details go here. Empty strings are treated as "not yet
-// confirmed" and are HIDDEN on the public site. Add values only once the client
-// confirms them — no component code changes are required.
+// Verified TESDEF contact details (single source of truth). Empty strings are
+// treated as "not set" and are hidden on the public site. `notifyEmail` is where
+// form enquiries are directed.
 export const CONTACT = {
-  email: "", // general enquiries email — add once confirmed
+  email: "tesdef2026@gmail.com",
+  // Single verified enquiries address — no separate partnerships/media inboxes.
   partnershipsEmail: "",
   mediaEmail: "",
-  phone: "",
-  address: "", // office/location — add once confirmed
+  phone: "+234 807 914 5156",
+  address: "No. 3 Asupa Close, Edjeba, Warri, Delta State",
+  // Destination for all contact/volunteer/partner/support enquiries.
+  notifyEmail: "tesdef2026@gmail.com",
   socials: {
     x: "",
     facebook: "",
@@ -168,7 +171,7 @@ export const SEED_PROGRAMMES = [
 export const SEED_TEAM = [
   {
     name: "Tamarakuro Tonfawei",
-    role: "Founder",
+    role: "Founder & President",
     bio: "",
     image: "",
     order: 1,

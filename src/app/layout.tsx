@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Sora } from "next/font/google";
+import { ORG, CONTACT } from "@/lib/data";
 import "./globals.css";
 
 const inter = Inter({
@@ -73,6 +74,30 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// Organization structured data (SEO) — built from the verified contact info.
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  name: ORG.name,
+  alternateName: ORG.shortName,
+  url: FALLBACK_SITE_URL,
+  slogan: ORG.motto,
+  founder: { "@type": "Person", name: ORG.founderName, jobTitle: ORG.founderTitle },
+  ...(CONTACT.email ? { email: CONTACT.email } : {}),
+  ...(CONTACT.phone ? { telephone: CONTACT.phone } : {}),
+  ...(CONTACT.address
+    ? {
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "No. 3 Asupa Close, Edjeba",
+          addressLocality: "Warri",
+          addressRegion: "Delta State",
+          addressCountry: "NG",
+        },
+      }
+    : {}),
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -82,6 +107,10 @@ export default function RootLayout({
       className={`${inter.variable} ${sora.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-offwhite text-ink">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
         {children}
       </body>
     </html>

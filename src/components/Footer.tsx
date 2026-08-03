@@ -85,9 +85,15 @@ export function Footer() {
               </div>
             )}
 
-            {(CONTACT.address || CONTACT.email) && (
-              <address className="not-italic text-xs text-white/50">
+            {(CONTACT.address || CONTACT.email || CONTACT.phone) && (
+              <address className="not-italic text-xs leading-relaxed text-white/50">
                 {CONTACT.address && <>{CONTACT.address}<br /></>}
+                {CONTACT.phone && (
+                  <>
+                    <a href={`tel:${CONTACT.phone.replace(/\s+/g, "")}`} className="hover:text-white/80">{CONTACT.phone}</a>
+                    <br />
+                  </>
+                )}
                 {CONTACT.email && (
                   <a href={`mailto:${CONTACT.email}`} className="hover:text-white/80">{CONTACT.email}</a>
                 )}

@@ -29,7 +29,7 @@ export default function FounderPage() {
             <h1 className="font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
               {ORG.founderName}
             </h1>
-            <p className="mt-4 text-lg text-white/70">Founder, {ORG.shortName}</p>
+            <p className="mt-4 text-lg text-white/70">{ORG.founderTitle}, {ORG.shortName}</p>
           </div>
         </Container>
       </section>
@@ -50,7 +50,7 @@ export default function FounderPage() {
               <figcaption className="mt-6">
                 <p className="font-display font-bold text-forest">{ORG.founderName}</p>
                 <p className="text-sm text-muted">
-                  Founder, {ORG.name} ({ORG.shortName})
+                  {ORG.founderTitle}, {ORG.name} ({ORG.shortName})
                 </p>
               </figcaption>
             </figure>

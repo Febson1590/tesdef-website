@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { notifyEnquiry } from "@/lib/notify";
 
 // Support-interest submissions (no live payment processing).
 export async function POST(req: NextRequest) {
@@ -25,6 +26,7 @@ export async function POST(req: NextRequest) {
         status: "pending",
       },
     });
+    await notifyEnquiry("New support interest — TESDEF website", { Name: name, Email: email, Country: country ?? "", "Support type": supportType ?? "", Message: message ?? "" });
     return NextResponse.json({ ok: true });
   } catch (e) {
     console.error(e);

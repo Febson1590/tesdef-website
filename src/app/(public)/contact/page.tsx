@@ -52,7 +52,7 @@ export default function ContactPage() {
   if (CONTACT.email) details.push({ label: "General enquiries", value: CONTACT.email, href: `mailto:${CONTACT.email}` });
   if (CONTACT.partnershipsEmail) details.push({ label: "Partnerships", value: CONTACT.partnershipsEmail, href: `mailto:${CONTACT.partnershipsEmail}` });
   if (CONTACT.mediaEmail) details.push({ label: "Media & press", value: CONTACT.mediaEmail, href: `mailto:${CONTACT.mediaEmail}` });
-  if (CONTACT.phone) details.push({ label: "Phone", value: CONTACT.phone, href: `tel:${CONTACT.phone}` });
+  if (CONTACT.phone) details.push({ label: "Phone", value: CONTACT.phone, href: `tel:${CONTACT.phone.replace(/\s+/g, "")}` });
   if (CONTACT.address) details.push({ label: "Location", value: CONTACT.address });
 
   return (
