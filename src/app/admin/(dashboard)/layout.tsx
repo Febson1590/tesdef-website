@@ -1,5 +1,7 @@
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 
+export const dynamic = "force-dynamic";
+
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen overflow-hidden bg-offwhite">
