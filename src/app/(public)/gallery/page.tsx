@@ -31,7 +31,7 @@ export default async function GalleryPage() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">Photos</p>
             <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Gallery</h1>
-            <p className="mt-5 text-lg text-white/70">Sample images — pending the client&apos;s own photographs.</p>
+            <p className="mt-5 text-lg text-white/70">Photographs and field updates from TESDEF&apos;s work.</p>
           </div>
         </Container>
       </section>
@@ -39,7 +39,9 @@ export default async function GalleryPage() {
       <section className="bg-white py-12 sm:py-16">
         <Container>
           {items.length === 0 ? (
-            <p className="py-20 text-center text-muted">Gallery coming soon.</p>
+            <div className="mx-auto max-w-2xl rounded-2xl border border-black/5 bg-offwhite p-12 text-center">
+              <p className="text-base text-muted">Programme photographs, community activities and field updates will be published here as TESDEF&apos;s work progresses.</p>
+            </div>
           ) : (
             <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
               {items.map((item) => (

@@ -6,6 +6,7 @@ import { formatCurrency, progressPercent } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 const STATUS_LABEL: Record<string, string> = {
+  proposed: "Proposed",
   active: "Active",
   completed: "Completed",
   planning: "Planning",
@@ -13,6 +14,7 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 const STATUS_VARIANT: Record<string, "success" | "warning" | "info" | "default"> = {
+  proposed: "default",
   active: "success",
   completed: "info",
   planning: "warning",
@@ -30,7 +32,6 @@ type Props = {
   amountRaised: number;
   supporterCount: number;
   status: string;
-  isSample?: boolean;
   className?: string;
 };
 
@@ -45,7 +46,6 @@ export function ProjectCard({
   amountRaised,
   supporterCount,
   status,
-  isSample,
   className,
 }: Props) {
   const pct = progressPercent(amountRaised, fundingGoal);
@@ -73,7 +73,6 @@ export function ProjectCard({
           <Badge variant={STATUS_VARIANT[status] ?? "default"}>
             {STATUS_LABEL[status] ?? status}
           </Badge>
-          {isSample && <Badge variant="warning">Sample</Badge>}
         </div>
       </div>
 

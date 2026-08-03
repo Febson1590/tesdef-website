@@ -14,6 +14,9 @@ async function getPartners() {
 export async function PartnersSection() {
   const partners = await getPartners();
 
+  // Show the partners section only when verified partners exist.
+  if (partners.length === 0) return null;
+
   return (
     <section aria-labelledby="partners-heading" className="border-t border-black/5 bg-offwhite py-12 sm:py-16">
       <Container>

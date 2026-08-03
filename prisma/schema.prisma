@@ -45,10 +45,10 @@ model Project {
   fundingGoal    Float            @default(0)
   amountRaised   Float            @default(0)
   supporterCount Int              @default(0)
-  status         String           @default("active")
+  status         String           @default("draft")
   howFundsUsed   String           @default("[]")
   isSample       Boolean          @default(false)
-  published      Boolean          @default(true)
+  published      Boolean          @default(false)
   images         ProjectImage[]
   updates        ProjectUpdate[]
   donations      DonationRecord[]
@@ -84,8 +84,9 @@ model NewsPost {
   coverImage  String    @default("")
   category    String    @default("")
   tags        String    @default("[]")
+  status      String    @default("draft")
   isSample    Boolean   @default(false)
-  published   Boolean   @default(true)
+  published   Boolean   @default(false)
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
@@ -103,8 +104,9 @@ model Event {
   startDate        DateTime
   endDate          DateTime?
   registrationLink String    @default("")
+  status           String    @default("draft")
   isSample         Boolean   @default(false)
-  published        Boolean   @default(true)
+  published        Boolean   @default(false)
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
 }

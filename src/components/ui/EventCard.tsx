@@ -8,11 +8,10 @@ type Props = {
   startDate: string;
   slug: string;
   isVirtual?: boolean;
-  isSample?: boolean;
   className?: string;
 };
 
-export function EventCard({ title, description, location, startDate, slug, isVirtual, isSample, className }: Props) {
+export function EventCard({ title, description, location, startDate, slug, isVirtual, className }: Props) {
   const d = new Date(startDate);
   const day = d.toLocaleDateString("en-GB", { day: "2-digit" });
   const month = d.toLocaleDateString("en-GB", { month: "short" });
@@ -29,10 +28,9 @@ export function EventCard({ title, description, location, startDate, slug, isVir
         <h3 className="font-display text-base font-bold leading-snug text-forest group-hover:text-primary">
           <Link href={`/events/${slug}`}>{title}</Link>
         </h3>
-        <p className="mt-1 text-xs text-muted">
-          {isVirtual ? "Virtual" : location}
-          {isSample && <span className="ml-2 rounded bg-fresh/20 px-1.5 py-0.5 font-semibold text-forest">Sample</span>}
-        </p>
+        {(isVirtual || location) && (
+          <p className="mt-1 text-xs text-muted">{isVirtual ? "Virtual" : location}</p>
+        )}
         <p className="mt-2 text-sm leading-relaxed text-muted">{description.slice(0, 100)}…</p>
         <Link href={`/events/${slug}`} className="mt-3 text-sm font-semibold text-primary hover:text-forest">
           Learn more →

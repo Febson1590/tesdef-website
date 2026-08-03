@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
+import { IntroSection } from "@/components/sections/IntroSection";
 import { ProgrammesSection } from "@/components/sections/ProgrammesSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { ImpactSection } from "@/components/sections/ImpactSection";
 import { HowItWorksSection } from "@/components/sections/HowItWorksSection";
-import { StoriesSection } from "@/components/sections/StoriesSection";
 import { NewsSection } from "@/components/sections/NewsSection";
 import { GetInvolvedSection } from "@/components/sections/GetInvolvedSection";
-import { DonateCtaSection } from "@/components/sections/DonateCtaSection";
 import { TrustSection } from "@/components/sections/TrustSection";
 import { PartnersSection } from "@/components/sections/PartnersSection";
 
@@ -21,14 +19,12 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <IntroSection />
       <ProgrammesSection />
       <ProjectsSection />
-      <ImpactSection />
       <HowItWorksSection />
-      <StoriesSection />
       <NewsSection />
       <GetInvolvedSection />
-      <DonateCtaSection />
       <TrustSection />
       <PartnersSection />
     </>

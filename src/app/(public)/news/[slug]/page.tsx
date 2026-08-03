@@ -63,12 +63,6 @@ export default async function NewsDetailPage({ params }: Props) {
       <section className="bg-white py-12">
         <Container>
           <div className="mx-auto max-w-3xl">
-            {post.isSample && (
-              <div className="mb-6 rounded-2xl border border-dashed border-primary/30 bg-offwhite p-4 text-sm text-muted">
-                <span className="font-semibold text-forest">Sample content — pending client confirmation.</span>{" "}
-                This is a placeholder post. Verified news will be published by TESDEF.
-              </div>
-            )}
             <div className="prose max-w-none text-ink">
               {post.content.split("\n\n").map((para, i) => (
                 <p key={i} className="mt-4 leading-relaxed">{para}</p>

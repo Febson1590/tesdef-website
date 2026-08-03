@@ -19,13 +19,14 @@ export async function createProject(formData: FormData) {
   const slug = slugify(title);
   await prisma.project.create({
     data: {
-      title, summary, story, location, status: status || "active",
+      title, summary, story, location, status: status || "proposed",
       fundingGoal, amountRaised,
       coverImage: coverImage || "/images/project-placeholder.jpg",
       slug,
       objectives: "[]",
       howFundsUsed: "[]",
       programmeId: programmeId || null,
+      published: true,
     },
   });
   revalidatePath("/admin/projects");

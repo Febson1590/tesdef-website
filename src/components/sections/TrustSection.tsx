@@ -36,9 +36,9 @@ export function TrustSection() {
     <section aria-labelledby="trust-heading" className="border-t border-black/5 bg-white py-16 sm:py-20">
       <Container>
         <div className="mb-10 text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary/70">Our commitments</p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary/70">Accountability &amp; transparency</p>
           <h2 id="trust-heading" className="font-display text-2xl font-bold text-forest sm:text-3xl">
-            How TESDEF works
+            Our commitment to accountability
           </h2>
         </div>
 

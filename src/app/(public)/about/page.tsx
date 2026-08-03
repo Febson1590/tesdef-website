@@ -24,24 +24,32 @@ export default function AboutPage() {
               About TESDEF
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-white/70">
-              The {ORG.name} ({ORG.shortName}) advances environmental sustainability,
-              youth empowerment, digital innovation and inclusive community development.
-              Rooted in Gbaramatu Kingdom and the Niger Delta, the Foundation works with
-              communities across Nigeria and beyond.
+              {ORG.motto}
             </p>
           </div>
         </Container>
       </section>
 
-      {/* Vision & Mission */}
+      {/* Official introduction */}
       <section className="bg-white py-16 sm:py-20">
         <Container>
+          <div className="mx-auto max-w-3xl space-y-4">
+            {ORG.intro.map((para, i) => (
+              <p key={i} className="text-base leading-relaxed text-ink sm:text-lg">{para}</p>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Vision & Mission */}
+      <section className="bg-offwhite py-16 sm:py-20">
+        <Container>
           <div className="grid gap-8 lg:grid-cols-2">
-            <div className="rounded-2xl border border-black/5 bg-offwhite p-8">
+            <div className="rounded-2xl border border-black/5 bg-white p-8">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.10em] text-primary">Our Vision</p>
               <p className="text-base leading-relaxed text-ink">{ORG.vision}</p>
             </div>
-            <div className="rounded-2xl border border-black/5 bg-offwhite p-8">
+            <div className="rounded-2xl border border-black/5 bg-white p-8">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.10em] text-primary">Our Mission</p>
               <p className="text-base leading-relaxed text-ink">{ORG.mission}</p>
             </div>
@@ -50,7 +58,7 @@ export default function AboutPage() {
       </section>
 
       {/* Purpose */}
-      <section className="bg-offwhite py-16 sm:py-20">
+      <section className="bg-white py-16 sm:py-20">
         <Container>
           <div className="mx-auto max-w-3xl">
             <SectionHeading label="Why we exist" title="Our purpose" align="left" />
@@ -64,7 +72,7 @@ export default function AboutPage() {
       </section>
 
       {/* Core Values */}
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-offwhite py-16 sm:py-20">
         <Container>
           <SectionHeading
             label="What guides us"
@@ -73,7 +81,7 @@ export default function AboutPage() {
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {CORE_VALUES.map((v, i) => (
-              <div key={v.title} className="rounded-2xl border border-black/5 bg-offwhite p-6">
+              <div key={v.title} className="rounded-2xl border border-black/5 bg-white p-6">
                 <span className="mb-3 block font-display text-3xl font-extrabold text-mint">0{i + 1}</span>
                 <h3 className="font-display text-lg font-bold text-forest">{v.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{v.description}</p>

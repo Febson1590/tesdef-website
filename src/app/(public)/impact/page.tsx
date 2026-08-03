@@ -76,16 +76,14 @@ export default function ImpactPage() {
         </Container>
       </section>
 
-      {/* Metrics note */}
-      <section className="bg-white py-14">
+      {/* Measuring our impact */}
+      <section className="bg-white py-16">
         <Container>
-          <div className="mx-auto max-w-3xl rounded-2xl border border-dashed border-primary/30 bg-offwhite p-6 text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-primary">
-              Impact metrics — pending client confirmation
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-muted">
-              Verified impact figures will be published here as programmes are delivered
-              and results are confirmed. We do not publish unverified numbers.
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-display text-2xl font-bold text-forest sm:text-3xl">Measuring Our Impact</h2>
+            <p className="mt-4 text-base leading-relaxed text-muted">
+              As TESDEF&apos;s programmes are delivered, verified results and progress reports will be
+              published here to ensure transparency and accountability.
             </p>
           </div>
         </Container>

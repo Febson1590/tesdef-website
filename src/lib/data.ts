@@ -7,9 +7,10 @@
 //   • Only the client's official information may be presented as fact.
 //   • No invented statistics, achievements, people, partners, funding totals,
 //     registration/audit claims, project outcomes, testimonials, or history.
-//   • Illustrative example records (projects, news, events, gallery) are marked
-//     `isSample: true` and labelled "Sample content — pending client
-//     confirmation" so they are never shown as verified facts.
+//   • Unconfirmed items are either hidden from the public site (published:false,
+//     visible only in the admin dashboard as drafts) or presented honestly as
+//     PROPOSED initiatives — never as verified/active facts. No "sample" or
+//     "pending confirmation" wording appears on public pages.
 // ============================================================================
 
 // ─── Organisation facts (official) ─────────────────────────────────────────
@@ -20,6 +21,14 @@ export const ORG = {
   motto: "Empowering Communities. Protecting Nature. Building the Future.",
   heroDescription:
     "TESDEF advances environmental sustainability, youth empowerment, digital innovation and inclusive community development to create resilient communities and lasting impact.",
+  supportingStatement:
+    "Working with communities to advance sustainability, innovation and inclusive development.",
+  // Official introduction (full wording — keep intact on the About page).
+  intro: [
+    "The Tamarakuro Environmental and Sustainable Development Foundation (TESDEF) is a non-profit, non-governmental organization established to promote environmental sustainability, youth empowerment, digital innovation, and community development within Gbaramatu Kingdom, Delta State, the Niger Delta region, and beyond.",
+    "Founded by Tamarakuro Tonfawei, TESDEF is inspired by a vision to transform vulnerable communities into resilient, environmentally responsible, and economically empowered societies.",
+    "TESDEF recognizes that sustainable development is achieved when environmental conservation, education, technology, innovation, and human capital development work together to create lasting social and economic impact.",
+  ],
   vision:
     "To become a leading environmental and sustainable development organization that empowers communities through innovation, environmental stewardship, education, and inclusive socio-economic development, creating resilient communities for present and future generations.",
   mission:
@@ -30,39 +39,62 @@ export const ORG = {
   ],
   founderName: "Tamarakuro Tonfawei",
   founderTitle: "Founder",
+  // Official founder's statement (client-supplied, verbatim).
+  // DEVELOPER/ADMIN NOTE (do not surface publicly): the statement below contains
+  // the phrase "Tonfawei Environmental and Sustainable Development Foundation",
+  // whereas the official organisation name is "Tamarakuro Environmental and
+  // Sustainable Development Foundation". This exact wording REQUIRES CLIENT
+  // CONFIRMATION. It is shown verbatim as supplied; do not silently rewrite it.
+  founderStatement:
+    "Growing up in Gbaramatu Kingdom, I witnessed the immense environmental and socio-economic challenges faced by our communities. My academic journey in Environmental Management at the University of Bedfordshire, supported by the Presidential Amnesty Programme, deepened my understanding of sustainable development and strengthened my resolve to give back. Through the Tonfawei Environmental and Sustainable Development Foundation (TESDEF), I envision a future where our youth are equipped with digital and entrepreneurial skills, our communities are cleaner and greener, and our natural environment is protected for generations to come. TESDEF is not just an organization—it is a commitment to transforming challenges into opportunities and building a legacy of sustainability, innovation, and community resilience.",
 } as const;
 
-// The eight official core values.
-// NOTE: value NAMES are official. The one-line explanations below are neutral
-// placeholder definitions — replace with the client's official wording when
-// provided (flagged for client confirmation).
+// The eight official core values (official wording — keep intact on the About page).
 export const CORE_VALUES = [
-  { title: "Sustainability", description: "We design for lasting impact, protecting the environment and building capacity that endures for future generations." },
-  { title: "Integrity", description: "We act with honesty, transparency and accountability in everything we do." },
-  { title: "Innovation", description: "We embrace creative, context-appropriate solutions and continuously learn and improve." },
-  { title: "Community Ownership", description: "We work with communities as partners so that they lead, own and sustain the change." },
-  { title: "Excellence", description: "We hold ourselves to high standards in the quality and delivery of our work." },
-  { title: "Partnership", description: "We build honest, collaborative relationships that amplify shared impact." },
-  { title: "Inclusiveness", description: "We ensure young people, women and vulnerable groups can participate fully and benefit equally." },
-  { title: "Accountability", description: "We take responsibility for our commitments and measure and share our results openly." },
+  { title: "Sustainability", description: "We promote responsible environmental management and sustainable development practices that safeguard natural resources for future generations." },
+  { title: "Integrity", description: "We uphold the highest ethical standards in governance, accountability, transparency, and service delivery." },
+  { title: "Innovation", description: "We embrace creativity, technology, research, and innovative solutions to solve environmental and developmental challenges." },
+  { title: "Community Ownership", description: "We believe that lasting development is achieved when communities actively participate in identifying problems and implementing solutions." },
+  { title: "Excellence", description: "We strive for professionalism, quality, continuous learning, and measurable impact in every project we undertake." },
+  { title: "Partnership", description: "We value collaboration with governments, communities, academia, civil society, development agencies, and the private sector." },
+  { title: "Inclusiveness", description: "We promote equal opportunities regardless of gender, ethnicity, religion, disability, or socio-economic background." },
+  { title: "Accountability", description: "We remain accountable to our beneficiaries, donors, partners, and stakeholders through responsible stewardship of resources." },
 ] as const;
 
 // TESDEF's areas of focus (official). Presented qualitatively — no metrics.
 export const FOCUS_AREAS = [
   { title: "Environmental sustainability", icon: "leaf" },
+  { title: "Climate resilience", icon: "climate" },
   { title: "Youth empowerment", icon: "academic-cap" },
   { title: "Digital innovation & inclusion", icon: "computer" },
   { title: "Education & capacity building", icon: "book" },
-  { title: "Climate resilience", icon: "climate" },
   { title: "Community development", icon: "home" },
   { title: "Sustainable livelihoods", icon: "livelihood" },
-  { title: "Advocacy & research", icon: "megaphone" },
+  { title: "Research & advocacy", icon: "megaphone" },
   { title: "Strategic partnerships", icon: "users" },
   { title: "Women & vulnerable populations", icon: "heart" },
 ] as const;
 
+// ─── Contact configuration ──────────────────────────────────────────────────
+// Verified contact details go here. Empty strings are treated as "not yet
+// confirmed" and are HIDDEN on the public site. Add values only once the client
+// confirms them — no component code changes are required.
+export const CONTACT = {
+  email: "", // e.g. "info@tesdef.org" once confirmed
+  partnershipsEmail: "",
+  mediaEmail: "",
+  phone: "",
+  address: "", // e.g. "Delta State, Nigeria" once confirmed
+  socials: {
+    x: "",
+    facebook: "",
+    instagram: "",
+    linkedin: "",
+  },
+} as const;
+
 // ─── Programmes (areas of work) ─────────────────────────────────────────────
-// These describe TESDEF's intended areas of work, not claimed achievements.
+// Official programme areas. These describe TESDEF's intended areas of work.
 
 export const PROGRAMMES = [
   {
@@ -76,7 +108,6 @@ export const PROGRAMMES = [
     colour: "forest",
     order: 1,
     published: true,
-    projectCount: 1,
   },
   {
     id: "prog-2",
@@ -89,7 +120,6 @@ export const PROGRAMMES = [
     colour: "primary",
     order: 2,
     published: true,
-    projectCount: 1,
   },
   {
     id: "prog-3",
@@ -102,7 +132,6 @@ export const PROGRAMMES = [
     colour: "primary",
     order: 3,
     published: true,
-    projectCount: 1,
   },
   {
     id: "prog-4",
@@ -115,7 +144,6 @@ export const PROGRAMMES = [
     colour: "primary",
     order: 4,
     published: true,
-    projectCount: 1,
   },
   {
     id: "prog-5",
@@ -128,16 +156,13 @@ export const PROGRAMMES = [
     colour: "primary",
     order: 5,
     published: true,
-    projectCount: 1,
   },
 ];
 
-// ─── Projects (SAMPLE / illustrative) ───────────────────────────────────────
-// Every entry below is illustrative example content only. It carries no
-// verified outcomes, funding figures, or supporter counts. `isSample: true`
-// drives a visible "Sample content — pending client confirmation" label.
-
-const SAMPLE_NOTE = "Sample content — pending client confirmation.";
+// ─── Proposed initiatives (public, honestly framed as proposals) ────────────
+// These are NOT active projects. They carry no verified status, funding,
+// supporters, dates, locations, or outcomes — only the intended focus and
+// objectives. `status: "proposed"` drives an honest "Proposed" presentation.
 
 export const PROJECTS = [
   {
@@ -145,35 +170,29 @@ export const PROJECTS = [
     slug: "community-reforestation-initiative",
     title: "Community Reforestation Initiative",
     summary:
-      "An illustrative example of how TESDEF intends to support community-led planting and stewardship to restore tree cover. " + SAMPLE_NOTE,
-    story: `${SAMPLE_NOTE}
+      "A proposed initiative to support community-led planting and stewardship that helps restore tree cover and strengthen local ecosystems.",
+    story: `Loss of tree cover contributes to soil erosion, declining biodiversity, and reduced resilience to a changing climate. Through this proposed initiative, TESDEF intends to work alongside residents to plant native species and establish long-term community stewardship of the land.
 
-Loss of tree cover contributes to soil erosion, declining biodiversity, and reduced resilience to a changing climate. TESDEF's intended approach to reforestation is community-led: working alongside residents to plant native species and to establish long-term stewardship of the land.
-
-The details below are illustrative placeholders. Verified objectives, locations, timelines and results will be provided by TESDEF and confirmed before publication.`,
+Final project details — including locations, timelines and delivery plans — will be published following approval.`,
     coverImage: "/images/hero/hero-tree-planting.jpg",
     programmeId: "prog-1",
     programmeName: "Environmental Sustainability & Climate Resilience",
     programmeSlug: "environmental-sustainability",
     objectives: [
       "Support community-led planting of native tree species",
-      "Train community members in long-term tree stewardship",
+      "Build local capacity for long-term tree stewardship",
       "Encourage local nurseries and seedling production",
     ],
-    location: "Niger Delta, Nigeria",
+    location: "",
     startDate: null,
     endDate: null,
     fundingGoal: 0,
     amountRaised: 0,
     supporterCount: 0,
-    status: "active",
-    howFundsUsed: [
-      "Seedlings and planting materials",
-      "Community stewardship and training",
-      "Monitoring and reporting",
-    ],
-    updates: [],
-    isSample: true,
+    status: "proposed",
+    howFundsUsed: [] as string[],
+    updates: [] as { date: string; title: string; content: string }[],
+    isSample: false,
     published: true,
   },
   {
@@ -181,12 +200,10 @@ The details below are illustrative placeholders. Verified objectives, locations,
     slug: "clean-water-and-sanitation-initiative",
     title: "Clean Water & Sanitation Initiative",
     summary:
-      "An illustrative example of TESDEF's intended work on safe water access and community hygiene. " + SAMPLE_NOTE,
-    story: `${SAMPLE_NOTE}
+      "A proposed initiative to improve access to safe water and community hygiene, prioritising underserved and vulnerable populations.",
+    story: `Access to safe water and sanitation is fundamental to community health and wellbeing. Through this proposed initiative, TESDEF intends to combine community-managed water infrastructure with hygiene education, prioritising underserved and vulnerable populations.
 
-Access to safe water and sanitation is fundamental to community health and wellbeing. TESDEF's intended approach combines community-managed water infrastructure with hygiene education, prioritising underserved and vulnerable populations.
-
-The details below are illustrative placeholders. Verified objectives, locations, timelines and results will be provided by TESDEF and confirmed before publication.`,
+Final project details — including locations, timelines and delivery plans — will be published following approval.`,
     coverImage: "/images/hero/hero-tree-planting.jpg",
     programmeId: "prog-4",
     programmeName: "Community Development & Sustainable Livelihoods",
@@ -196,20 +213,16 @@ The details below are illustrative placeholders. Verified objectives, locations,
       "Support community water management and maintenance",
       "Promote hygiene and sanitation education",
     ],
-    location: "Delta State, Nigeria",
+    location: "",
     startDate: null,
     endDate: null,
     fundingGoal: 0,
     amountRaised: 0,
     supporterCount: 0,
-    status: "active",
-    howFundsUsed: [
-      "Water infrastructure and installation",
-      "Community management and training",
-      "Health and hygiene education",
-    ],
-    updates: [],
-    isSample: true,
+    status: "proposed",
+    howFundsUsed: [] as string[],
+    updates: [] as { date: string; title: string; content: string }[],
+    isSample: false,
     published: true,
   },
   {
@@ -217,12 +230,10 @@ The details below are illustrative placeholders. Verified objectives, locations,
     slug: "digital-skills-initiative",
     title: "Digital Skills Initiative",
     summary:
-      "An illustrative example of TESDEF's intended digital skills and inclusion work for young people. " + SAMPLE_NOTE,
-    story: `${SAMPLE_NOTE}
+      "A proposed initiative to deliver practical digital skills and improve access to technology for young people.",
+    story: `Digital skills open access to education, work and enterprise. Through this proposed initiative, TESDEF intends to deliver practical digital training and improve access to technology so that young people — including those in underserved communities — can participate in the digital economy.
 
-Digital skills open access to education, work and enterprise. TESDEF's intended approach is to deliver practical digital training and improve access to technology so that young people — including those in underserved communities — can participate in the digital economy.
-
-The details below are illustrative placeholders. Verified objectives, locations, timelines and results will be provided by TESDEF and confirmed before publication.`,
+Final project details — including locations, timelines and delivery plans — will be published following approval.`,
     coverImage: "/images/hero/hero-tree-planting.jpg",
     programmeId: "prog-3",
     programmeName: "Digital Innovation & Inclusion",
@@ -232,20 +243,16 @@ The details below are illustrative placeholders. Verified objectives, locations,
       "Improve access to technology in underserved communities",
       "Support youth-led digital enterprise and innovation",
     ],
-    location: "Delta State, Nigeria",
+    location: "",
     startDate: null,
     endDate: null,
     fundingGoal: 0,
     amountRaised: 0,
     supporterCount: 0,
-    status: "active",
-    howFundsUsed: [
-      "Equipment and learning materials",
-      "Training and facilitation",
-      "Programme operations",
-    ],
-    updates: [],
-    isSample: true,
+    status: "proposed",
+    howFundsUsed: [] as string[],
+    updates: [] as { date: string; title: string; content: string }[],
+    isSample: false,
     published: true,
   },
   {
@@ -253,12 +260,10 @@ The details below are illustrative placeholders. Verified objectives, locations,
     slug: "young-women-in-technology-initiative",
     title: "Young Women in Technology Initiative",
     summary:
-      "An illustrative example of TESDEF's intended work to support young women in technology. " + SAMPLE_NOTE,
-    story: `${SAMPLE_NOTE}
+      "A proposed initiative to support young women with technology training, mentorship and opportunities in the digital economy.",
+    story: `Women and girls often face additional barriers to participating in the digital economy. Through this proposed initiative, TESDEF intends to provide technology training, mentorship and support that help young women build skills and confidence and pursue opportunities in technology.
 
-Women and girls often face additional barriers to participating in the digital economy. TESDEF's intended approach is to provide technology training, mentorship and support that help young women build skills and confidence and pursue opportunities in technology.
-
-The details below are illustrative placeholders. Verified objectives, locations, timelines and results will be provided by TESDEF and confirmed before publication.`,
+Final project details — including locations, timelines and delivery plans — will be published following approval.`,
     coverImage: "/images/hero/hero-tree-planting.jpg",
     programmeId: "prog-2",
     programmeName: "Youth Empowerment & Education",
@@ -268,20 +273,16 @@ The details below are illustrative placeholders. Verified objectives, locations,
       "Build confidence and readiness for the digital economy",
       "Grow a supportive peer and mentor network",
     ],
-    location: "Delta State, Nigeria",
+    location: "",
     startDate: null,
     endDate: null,
     fundingGoal: 0,
     amountRaised: 0,
     supporterCount: 0,
-    status: "active",
-    howFundsUsed: [
-      "Training and mentorship",
-      "Equipment and access support",
-      "Programme operations",
-    ],
-    updates: [],
-    isSample: true,
+    status: "proposed",
+    howFundsUsed: [] as string[],
+    updates: [] as { date: string; title: string; content: string }[],
+    isSample: false,
     published: true,
   },
   {
@@ -289,12 +290,10 @@ The details below are illustrative placeholders. Verified objectives, locations,
     slug: "climate-awareness-and-advocacy-initiative",
     title: "Climate Awareness & Advocacy Initiative",
     summary:
-      "An illustrative example of TESDEF's intended climate awareness, research and advocacy work. " + SAMPLE_NOTE,
-    story: `${SAMPLE_NOTE}
+      "A proposed initiative combining education, research and advocacy to support community-centred environmental action.",
+    story: `Building climate awareness and advocating for community-centred solutions is central to TESDEF's mission. Through this proposed initiative, TESDEF intends to combine education, evidence-based research, and advocacy — supporting young people to understand and respond to environmental challenges in their communities.
 
-Building climate awareness and advocating for community-centred solutions is central to TESDEF's mission. The intended approach combines education, evidence-based research, and advocacy — supporting young people to understand and respond to environmental challenges in their communities.
-
-The details below are illustrative placeholders. Verified objectives, locations, timelines and results will be provided by TESDEF and confirmed before publication.`,
+Final project details — including locations, timelines and delivery plans — will be published following approval.`,
     coverImage: "/images/hero/hero-tree-planting.jpg",
     programmeId: "prog-5",
     programmeName: "Advocacy, Research & Strategic Partnerships",
@@ -304,139 +303,60 @@ The details below are illustrative placeholders. Verified objectives, locations,
       "Support evidence-based research on community priorities",
       "Advocate for community-centred environmental solutions",
     ],
-    location: "Niger Delta, Nigeria",
+    location: "",
     startDate: null,
     endDate: null,
     fundingGoal: 0,
     amountRaised: 0,
     supporterCount: 0,
-    status: "active",
-    howFundsUsed: [
-      "Awareness and education activities",
-      "Research and documentation",
-      "Advocacy and coordination",
-    ],
-    updates: [],
-    isSample: true,
+    status: "proposed",
+    howFundsUsed: [] as string[],
+    updates: [] as { date: string; title: string; content: string }[],
+    isSample: false,
     published: true,
   },
 ];
 
-// ─── News (SAMPLE / illustrative) ───────────────────────────────────────────
-// Generic placeholder posts. No quotes, statistics, named partners, or events
-// are asserted as fact. Replace with verified news via the admin dashboard.
+// ─── News ───────────────────────────────────────────────────────────────────
+// No verified news yet. These remain as admin DRAFTS (published:false) and are
+// NOT shown on the public site (which displays a professional empty state).
+export type NewsItem = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  coverImage: string;
+  category: string;
+  tags: string[];
+  publishedAt: string;
+  status: string;
+  isSample: boolean;
+  published: boolean;
+};
+export const NEWS: NewsItem[] = [];
 
-export const NEWS = [
-  {
-    id: "news-1",
-    slug: "welcome-to-tesdef",
-    title: "Welcome to TESDEF",
-    excerpt:
-      "An introduction to the Tamarakuro Environmental and Sustainable Development Foundation and its areas of focus. " + SAMPLE_NOTE,
-    content: `${SAMPLE_NOTE}
-
-The Tamarakuro Environmental and Sustainable Development Foundation (TESDEF) works to advance environmental sustainability, youth empowerment, digital innovation and inclusive community development.
-
-This is a placeholder announcement. TESDEF's verified news and updates will be published here once confirmed.`,
-    coverImage: "/images/hero/hero-tree-planting.jpg",
-    category: "Announcements",
-    tags: ["TESDEF", "about"],
-    publishedAt: "2026-08-01",
-    isSample: true,
-    published: true,
-  },
-  {
-    id: "news-2",
-    slug: "our-areas-of-focus",
-    title: "Our Areas of Focus",
-    excerpt:
-      "A look at the themes that guide TESDEF's work, from environmental sustainability to digital inclusion. " + SAMPLE_NOTE,
-    content: `${SAMPLE_NOTE}
-
-TESDEF's work spans environmental sustainability, youth empowerment, digital innovation and inclusion, education and capacity building, climate resilience, community development, sustainable livelihoods, advocacy, research, and strategic partnerships.
-
-This is a placeholder article. Verified programme updates will be published here once confirmed.`,
-    coverImage: "/images/hero/hero-tree-planting.jpg",
-    category: "Programmes",
-    tags: ["focus areas", "programmes"],
-    publishedAt: "2026-07-15",
-    isSample: true,
-    published: true,
-  },
-  {
-    id: "news-3",
-    slug: "get-involved-with-tesdef",
-    title: "Get Involved with TESDEF",
-    excerpt:
-      "Ways to support TESDEF's mission — as a volunteer, partner or supporter. " + SAMPLE_NOTE,
-    content: `${SAMPLE_NOTE}
-
-There are several ways to support TESDEF's mission, including volunteering, partnering, and contributing to our work.
-
-This is a placeholder article. Verified opportunities and calls to action will be published here once confirmed.`,
-    coverImage: "/images/hero/hero-tree-planting.jpg",
-    category: "Get involved",
-    tags: ["volunteer", "partnership"],
-    publishedAt: "2026-07-01",
-    isSample: true,
-    published: true,
-  },
-];
-
-// ─── Events (SAMPLE / illustrative) ─────────────────────────────────────────
-
-export const EVENTS = [
-  {
-    id: "evt-1",
-    slug: "community-environmental-day-sample",
-    title: "Community Environmental Day (Sample)",
-    description:
-      "An illustrative example of a community environmental engagement event. Date, location and details are placeholders. " + SAMPLE_NOTE,
-    coverImage: "/images/hero/hero-tree-planting.jpg",
-    location: "To be confirmed",
-    isVirtual: false,
-    startDate: "2026-09-15T09:00:00Z",
-    endDate: "2026-09-15T15:00:00Z",
-    registrationLink: "#",
-    isSample: true,
-    published: true,
-  },
-  {
-    id: "evt-2",
-    slug: "digital-skills-workshop-sample",
-    title: "Digital Skills Workshop (Sample)",
-    description:
-      "An illustrative example of a youth digital skills workshop. Date, location and details are placeholders. " + SAMPLE_NOTE,
-    coverImage: "/images/hero/hero-tree-planting.jpg",
-    location: "To be confirmed",
-    isVirtual: false,
-    startDate: "2026-10-05T10:00:00Z",
-    endDate: "2026-10-05T16:00:00Z",
-    registrationLink: "#",
-    isSample: true,
-    published: true,
-  },
-  {
-    id: "evt-3",
-    slug: "community-forum-sample",
-    title: "Community Forum (Sample)",
-    description:
-      "An illustrative example of a community forum bringing together residents and stakeholders. Date, location and details are placeholders. " + SAMPLE_NOTE,
-    coverImage: "/images/hero/hero-tree-planting.jpg",
-    location: "To be confirmed",
-    isVirtual: false,
-    startDate: "2026-11-12T09:00:00Z",
-    endDate: "2026-11-12T17:00:00Z",
-    registrationLink: "#",
-    isSample: true,
-    published: true,
-  },
-];
+// ─── Events ─────────────────────────────────────────────────────────────────
+// No confirmed events yet. Public site shows a professional empty state.
+export type EventItem = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  coverImage: string;
+  location: string;
+  isVirtual: boolean;
+  startDate: string;
+  endDate: string | null;
+  registrationLink: string;
+  status: string;
+  isSample: boolean;
+  published: boolean;
+};
+export const EVENTS: EventItem[] = [];
 
 // ─── Impact statistics ──────────────────────────────────────────────────────
 // Intentionally empty: TESDEF has no verified public metrics to display yet.
-// Do not add numbers here without client confirmation. The public site shows
-// qualitative FOCUS_AREAS instead of unverified figures.
 export type ImpactStat = {
   id: string;
   label: string;
@@ -448,8 +368,6 @@ export type ImpactStat = {
 export const IMPACT_STATS: ImpactStat[] = [];
 
 // ─── Testimonials ───────────────────────────────────────────────────────────
-// Intentionally empty: no verified testimonials. Add real, consented quotes
-// via the admin dashboard when available.
 export type Testimonial = {
   id: string;
   quote: string;
@@ -463,8 +381,7 @@ export type Testimonial = {
 export const TESTIMONIALS: Testimonial[] = [];
 
 // ─── Team ───────────────────────────────────────────────────────────────────
-// Only the verified founder is listed. Do not add staff names unless confirmed
-// by the client. Additional team profiles are pending client confirmation.
+// Only the verified founder is listed. No other staff names are confirmed.
 export type TeamMember = {
   id: string;
   name: string;
@@ -499,18 +416,19 @@ export type Partner = {
 };
 export const PARTNERS: Partner[] = [];
 
-// ─── Gallery (SAMPLE / illustrative) ────────────────────────────────────────
-// Placeholder images pending the client's own photographs. Captions do not
-// assert specific dated events.
-export const GALLERY_ITEMS = [
-  { id: "gal-1", url: "/images/hero/hero-tree-planting.jpg", caption: "Community tree planting (sample image — pending client photos)", category: "Environment", alt: "Community members planting a tree sapling", order: 1, published: true },
-  { id: "gal-2", url: "/images/hero/hero-tree-planting.jpg", caption: "Community engagement (sample image — pending client photos)", category: "Community", alt: "Community engagement activity", order: 2, published: true },
-  { id: "gal-3", url: "/images/hero/hero-tree-planting.jpg", caption: "Environmental stewardship (sample image — pending client photos)", category: "Environment", alt: "Environmental stewardship activity", order: 3, published: true },
-];
+// ─── Gallery ────────────────────────────────────────────────────────────────
+// No verified programme photographs yet. Public site shows an empty state.
+export type GalleryItem = {
+  id: string;
+  url: string;
+  caption: string;
+  category: string;
+  alt: string;
+  order: number;
+  published: boolean;
+};
+export const GALLERY_ITEMS: GalleryItem[] = [];
 
 // ─── Type exports ───────────────────────────────────────────────────────────
 export type Programme = (typeof PROGRAMMES)[0];
 export type Project = (typeof PROJECTS)[0];
-export type NewsItem = (typeof NEWS)[0];
-export type EventItem = (typeof EVENTS)[0];
-export type GalleryItem = (typeof GALLERY_ITEMS)[0];

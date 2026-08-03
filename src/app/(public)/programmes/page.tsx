@@ -13,12 +13,10 @@ export const metadata: Metadata = {
 
 async function getProgrammes() {
   try {
-    const progs = await prisma.programme.findMany({
+    return await prisma.programme.findMany({
       where: { published: true },
       orderBy: { order: "asc" },
-      include: { _count: { select: { projects: true } } },
     });
-    return progs.map((p) => ({ ...p, projectCount: p._count.projects }));
   } catch {
     return PROGRAMMES.filter((p) => p.published);
   }
@@ -45,7 +43,7 @@ export default async function ProgrammesPage() {
         <Container>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {programmes.map((p) => (
-              <ProgrammeCard key={p.id} {...p} projectCount={p.projectCount ?? 0} />
+              <ProgrammeCard key={p.id} title={p.title} tagline={p.tagline} description={p.description} icon={p.icon} slug={p.slug} />
             ))}
           </div>
         </Container>

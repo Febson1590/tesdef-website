@@ -10,11 +10,10 @@ type Props = {
   slug: string;
   category: string;
   publishedAt: string;
-  isSample?: boolean;
   className?: string;
 };
 
-export function NewsCard({ title, excerpt, coverImage, slug, category, publishedAt, isSample, className }: Props) {
+export function NewsCard({ title, excerpt, coverImage, slug, category, publishedAt, className }: Props) {
   const date = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(publishedAt));
 
   return (
@@ -35,7 +34,6 @@ export function NewsCard({ title, excerpt, coverImage, slug, category, published
       <div className="flex flex-1 flex-col p-5">
         <div className="flex flex-wrap items-center gap-2">
           {category && <Badge variant="default">{category}</Badge>}
-          {isSample && <Badge variant="warning">Sample</Badge>}
           <time className="text-xs text-muted" dateTime={publishedAt}>{date}</time>
         </div>
         <h3 className="mt-3 font-display text-lg font-bold leading-snug text-forest">

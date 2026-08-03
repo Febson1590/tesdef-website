@@ -42,29 +42,23 @@ export default async function NewsPage() {
       <section className="bg-white py-16 sm:py-20">
         <Container>
           {posts.length === 0 ? (
-            <p className="py-20 text-center text-muted">No news posts yet — check back soon.</p>
+            <div className="mx-auto max-w-2xl rounded-2xl border border-black/5 bg-offwhite p-12 text-center">
+              <p className="text-base text-muted">News and updates from TESDEF will be published here soon.</p>
+            </div>
           ) : (
-            <>
-              {posts.some((n) => "isSample" in n && n.isSample) && (
-                <div className="mb-10 rounded-2xl border border-dashed border-primary/30 bg-offwhite p-4 text-center text-sm text-muted">
-                  Posts marked <span className="font-semibold text-forest">Sample</span> are placeholders — pending client confirmation.
-                </div>
-              )}
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {posts.map((n) => (
-                  <NewsCard
-                    key={n.id}
-                    title={n.title}
-                    excerpt={n.excerpt}
-                    coverImage={n.coverImage}
-                    slug={n.slug}
-                    category={n.category}
-                    publishedAt={n.publishedAt?.toISOString() ?? n.createdAt.toISOString()}
-                    isSample={"isSample" in n ? Boolean(n.isSample) : false}
-                  />
-                ))}
-              </div>
-            </>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {posts.map((n) => (
+                <NewsCard
+                  key={n.id}
+                  title={n.title}
+                  excerpt={n.excerpt}
+                  coverImage={n.coverImage}
+                  slug={n.slug}
+                  category={n.category}
+                  publishedAt={n.publishedAt?.toISOString() ?? n.createdAt.toISOString()}
+                />
+              ))}
+            </div>
           )}
         </Container>
       </section>

@@ -16,7 +16,7 @@ export async function createEvent(formData: FormData) {
   const registrationLink = formData.get("registrationLink") as string;
   const slug = slugify(title);
   await prisma.event.create({
-    data: { title, excerpt: excerpt || "", description, location, startDate: new Date(startDate), coverImage: coverImage || "", registrationLink: registrationLink || "", slug },
+    data: { title, excerpt: excerpt || "", description, location, startDate: new Date(startDate), coverImage: coverImage || "", registrationLink: registrationLink || "", slug, status: "published", published: true },
   });
   revalidatePath("/admin/events");
   revalidatePath("/events");

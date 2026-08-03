@@ -28,6 +28,19 @@ const OPTIONS = [
     bg: "bg-white",
     colour: "text-forest",
   },
+  {
+    icon: (
+      <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1L12 21l7.7-7.6 1.1-1a5.5 5.5 0 0 0 0-7.8Z" />
+      </svg>
+    ),
+    title: "Support TESDEF",
+    description: "Register your interest in supporting our work. Your support helps advance environmental sustainability, youth empowerment and inclusive community development.",
+    cta: "Support our work",
+    href: "/donate",
+    bg: "bg-offwhite",
+    colour: "text-forest",
+  },
 ];
 
 export function GetInvolvedSection() {
@@ -40,11 +53,11 @@ export function GetInvolvedSection() {
             There is a place for you here
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted">
-            TESDEF grows stronger with every person who joins our mission. Here are two ways to get involved today.
+            TESDEF grows stronger with every person who joins our mission. Here are three ways to get involved today.
           </p>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {OPTIONS.map((o) => (
             <div key={o.title} className={`flex flex-col gap-4 rounded-2xl border border-black/5 ${o.bg} p-8 shadow-sm`}>
               <div className={`inline-flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 ${o.colour}`}>

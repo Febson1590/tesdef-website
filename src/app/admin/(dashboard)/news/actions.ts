@@ -14,7 +14,7 @@ export async function createNewsPost(formData: FormData) {
   const coverImage = formData.get("coverImage") as string;
   const slug = slugify(title);
   await prisma.newsPost.create({
-    data: { title, excerpt, content, category, coverImage: coverImage || "/images/news-placeholder.jpg", slug, publishedAt: new Date() },
+    data: { title, excerpt, content, category, coverImage: coverImage || "/images/news-placeholder.jpg", slug, status: "published", published: true, publishedAt: new Date() },
   });
   revalidatePath("/admin/news");
   revalidatePath("/news");

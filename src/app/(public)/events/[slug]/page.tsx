@@ -47,12 +47,6 @@ export default async function EventDetailPage({ params }: Props) {
       <section className="bg-white py-16">
         <Container>
           <div className="mx-auto max-w-3xl">
-            {ev.isSample && (
-              <div className="mb-6 rounded-2xl border border-dashed border-primary/30 bg-offwhite p-4 text-sm text-muted">
-                <span className="font-semibold text-forest">Sample content — pending client confirmation.</span>{" "}
-                Date, location and details are placeholders.
-              </div>
-            )}
             <div className="mb-8 grid gap-4 rounded-2xl border border-black/5 bg-offwhite p-6 sm:grid-cols-3">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted">Date</p>

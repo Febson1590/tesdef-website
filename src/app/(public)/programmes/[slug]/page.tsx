@@ -24,7 +24,7 @@ export default async function ProgrammeDetailPage({ params }: Props) {
   const { slug } = await params;
 
   let programme;
-  let projects: { id: string; title: string; summary: string; coverImage: string; slug: string; fundingGoal: number; amountRaised: number; supporterCount: number; status: string; isSample: boolean; programme: { title: string; slug: string } | null }[] = [];
+  let projects: { id: string; title: string; summary: string; coverImage: string; slug: string; fundingGoal: number; amountRaised: number; supporterCount: number; status: string; programme: { title: string; slug: string } | null }[] = [];
 
   try {
     programme = await prisma.programme.findUnique({
@@ -67,7 +67,7 @@ export default async function ProgrammeDetailPage({ params }: Props) {
       {projects.length > 0 && (
         <section className="bg-offwhite py-16">
           <Container>
-            <h2 className="mb-8 font-display text-2xl font-bold text-forest">Projects under this programme</h2>
+            <h2 className="mb-8 font-display text-2xl font-bold text-forest">Related initiatives</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {projects.map((p) => (
                 <ProjectCard
@@ -82,7 +82,6 @@ export default async function ProgrammeDetailPage({ params }: Props) {
                   amountRaised={p.amountRaised}
                   supporterCount={p.supporterCount}
                   status={p.status}
-                  isSample={Boolean(p.isSample)}
                 />
               ))}
             </div>

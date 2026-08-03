@@ -34,7 +34,6 @@ type Props = {
   tagline: string;
   description: string;
   icon: string;
-  projectCount: number;
   slug: string;
   className?: string;
 };
@@ -44,7 +43,6 @@ export function ProgrammeCard({
   tagline,
   description,
   icon,
-  projectCount,
   slug,
   className,
 }: Props) {
@@ -71,8 +69,7 @@ export function ProgrammeCard({
         {description.slice(0, 140)}…
       </p>
 
-      <div className="mt-5 flex items-center justify-between border-t border-black/5 pt-4">
-        <span className="text-xs text-muted">{projectCount} project{projectCount !== 1 ? "s" : ""}</span>
+      <div className="mt-5 flex items-center justify-end border-t border-black/5 pt-4">
         <Link
           href={`/programmes/${slug}`}
           className="inline-flex items-center gap-1 text-sm font-semibold text-primary transition-colors group-hover:text-forest"

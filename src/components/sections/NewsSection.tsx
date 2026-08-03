@@ -33,29 +33,36 @@ export async function NewsSection() {
           <SectionHeading
             id="news-heading"
             label="Latest updates"
-            title="Latest news"
-            subtitle="Announcements and updates from TESDEF. Sample content — pending client confirmation."
+            title="News & updates"
+            subtitle="Announcements and updates from TESDEF."
             align="left"
           />
-          <Link href="/news" className="flex-none text-sm font-semibold text-primary hover:text-forest">
-            All news →
-          </Link>
+          {posts.length > 0 && (
+            <Link href="/news" className="flex-none text-sm font-semibold text-primary hover:text-forest">
+              All news →
+            </Link>
+          )}
         </div>
 
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((n) => (
-            <NewsCard
-              key={n.id}
-              title={n.title}
-              excerpt={n.excerpt}
-              coverImage={n.coverImage}
-              slug={n.slug}
-              category={n.category}
-              publishedAt={n.publishedAt?.toISOString() ?? n.createdAt.toISOString()}
-              isSample={"isSample" in n ? Boolean(n.isSample) : false}
-            />
-          ))}
-        </div>
+        {posts.length === 0 ? (
+          <p className="mt-10 rounded-2xl border border-black/5 bg-white p-10 text-center text-muted">
+            News and updates from TESDEF will be published here soon.
+          </p>
+        ) : (
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {posts.map((n) => (
+              <NewsCard
+                key={n.id}
+                title={n.title}
+                excerpt={n.excerpt}
+                coverImage={n.coverImage}
+                slug={n.slug}
+                category={n.category}
+                publishedAt={n.publishedAt?.toISOString() ?? n.createdAt.toISOString()}
+              />
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );
