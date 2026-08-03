@@ -1,10 +1,11 @@
 // TESDEF — Prisma schema
-// Dev: SQLite (DATABASE_URL="file:./dev.db")
-// Prod: switch provider to "postgresql" and update DATABASE_URL
+// PostgreSQL (Neon). DATABASE_URL = pooled connection, DIRECT_URL = direct
+// connection (used for migrations / db push). Both come from the Neon dashboard.
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 generator client {
