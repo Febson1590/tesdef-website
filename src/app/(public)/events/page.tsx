@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Events",
-  description: "Upcoming events from TESDEF — community tree-planting days, hackathons, forums, and more.",
+  description: "Upcoming events from TESDEF — community engagement, workshops, forums, and more.",
 };
 
 async function getEvents() {
@@ -39,7 +39,7 @@ export default async function EventsPage() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">Calendar</p>
             <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Events</h1>
-            <p className="mt-5 text-lg text-white/70">Join TESDEF at our upcoming events across the Niger Delta and online.</p>
+            <p className="mt-5 text-lg text-white/70">Upcoming TESDEF events. Sample content — pending client confirmation.</p>
           </div>
         </Container>
       </section>
@@ -54,7 +54,7 @@ export default async function EventsPage() {
               <h2 className="mb-6 font-display text-2xl font-bold text-forest">Upcoming events</h2>
               <div className="grid gap-5 sm:grid-cols-2">
                 {upcoming.map((e) => (
-                  <EventCard key={e.id} title={e.title} description={e.description} location={e.location} startDate={e.startDate.toISOString()} slug={e.slug} isVirtual={e.isVirtual} />
+                  <EventCard key={e.id} title={e.title} description={e.description} location={e.location} startDate={e.startDate.toISOString()} slug={e.slug} isVirtual={e.isVirtual} isSample={Boolean(e.isSample)} />
                 ))}
               </div>
             </div>
@@ -64,7 +64,7 @@ export default async function EventsPage() {
               <h2 className="mb-6 font-display text-2xl font-bold text-muted">Past events</h2>
               <div className="grid gap-5 sm:grid-cols-2">
                 {past.map((e) => (
-                  <EventCard key={e.id} title={e.title} description={e.description} location={e.location} startDate={e.startDate.toISOString()} slug={e.slug} isVirtual={e.isVirtual} />
+                  <EventCard key={e.id} title={e.title} description={e.description} location={e.location} startDate={e.startDate.toISOString()} slug={e.slug} isVirtual={e.isVirtual} isSample={Boolean(e.isSample)} />
                 ))}
               </div>
             </div>

@@ -33,8 +33,8 @@ export async function NewsSection() {
           <SectionHeading
             id="news-heading"
             label="Latest updates"
-            title="News from the ground"
-            subtitle="Stories, announcements and insights from TESDEF's work across the Niger Delta."
+            title="Latest news"
+            subtitle="Announcements and updates from TESDEF. Sample content — pending client confirmation."
             align="left"
           />
           <Link href="/news" className="flex-none text-sm font-semibold text-primary hover:text-forest">
@@ -52,6 +52,7 @@ export async function NewsSection() {
               slug={n.slug}
               category={n.category}
               publishedAt={n.publishedAt?.toISOString() ?? n.createdAt.toISOString()}
+              isSample={"isSample" in n ? Boolean(n.isSample) : false}
             />
           ))}
         </div>

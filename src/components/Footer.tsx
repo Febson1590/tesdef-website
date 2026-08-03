@@ -75,7 +75,7 @@ export function Footer() {
             </span>
             <p className="max-w-xs text-sm leading-relaxed text-white/60">
               Tamarakuro Environmental and Sustainable Development Foundation.
-              Empowering communities, protecting nature, building the future.
+              Empowering Communities. Protecting Nature. Building the Future.
             </p>
             <div className="flex gap-2">
               {SOCIALS.map((s) => (
@@ -90,7 +90,7 @@ export function Footer() {
               ))}
             </div>
             <address className="not-italic text-xs text-white/50">
-              Warri, Delta State, Nigeria<br />
+              Delta State, Nigeria<br />
               <a href="mailto:info@tesdef.org" className="hover:text-white/80">info@tesdef.org</a>
             </address>
           </div>
@@ -115,8 +115,8 @@ export function Footer() {
 
       <div className="border-t border-white/10">
         <Container className="flex flex-col items-center justify-between gap-3 py-5 text-xs text-white/40 sm:flex-row">
-          <p>© {year} TESDEF. All rights reserved. Registered NGO in Nigeria.</p>
-          <p>Built with purpose.</p>
+          <p>© {year} TESDEF. All rights reserved.</p>
+          <p>Empowering Communities. Protecting Nature. Building the Future.</p>
         </Container>
       </div>
     </footer>

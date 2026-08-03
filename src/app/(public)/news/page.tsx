@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "News & Updates",
-  description: "The latest stories, announcements and insights from TESDEF's work across the Niger Delta.",
+  description: "The latest announcements and updates from TESDEF.",
 };
 
 async function getNews() {
@@ -34,7 +34,7 @@ export default async function NewsPage() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">Updates</p>
             <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">News & Updates</h1>
-            <p className="mt-5 text-lg text-white/70">Stories, announcements and insights from TESDEF's work.</p>
+            <p className="mt-5 text-lg text-white/70">Announcements and updates from TESDEF.</p>
           </div>
         </Container>
       </section>
@@ -44,19 +44,27 @@ export default async function NewsPage() {
           {posts.length === 0 ? (
             <p className="py-20 text-center text-muted">No news posts yet — check back soon.</p>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {posts.map((n) => (
-                <NewsCard
-                  key={n.id}
-                  title={n.title}
-                  excerpt={n.excerpt}
-                  coverImage={n.coverImage}
-                  slug={n.slug}
-                  category={n.category}
-                  publishedAt={n.publishedAt?.toISOString() ?? n.createdAt.toISOString()}
-                />
-              ))}
-            </div>
+            <>
+              {posts.some((n) => "isSample" in n && n.isSample) && (
+                <div className="mb-10 rounded-2xl border border-dashed border-primary/30 bg-offwhite p-4 text-center text-sm text-muted">
+                  Posts marked <span className="font-semibold text-forest">Sample</span> are placeholders — pending client confirmation.
+                </div>
+              )}
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {posts.map((n) => (
+                  <NewsCard
+                    key={n.id}
+                    title={n.title}
+                    excerpt={n.excerpt}
+                    coverImage={n.coverImage}
+                    slug={n.slug}
+                    category={n.category}
+                    publishedAt={n.publishedAt?.toISOString() ?? n.createdAt.toISOString()}
+                    isSample={"isSample" in n ? Boolean(n.isSample) : false}
+                  />
+                ))}
+              </div>
+            </>
           )}
         </Container>
       </section>

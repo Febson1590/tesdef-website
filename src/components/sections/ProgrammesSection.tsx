@@ -28,7 +28,7 @@ export async function ProgrammesSection() {
           id="programmes-heading"
           label="What we do"
           title="Five areas, one mission"
-          subtitle="TESDEF works across five interconnected programmes, each addressing a root cause of community vulnerability and environmental decline in the Niger Delta."
+          subtitle="TESDEF works across five interconnected programmes spanning environmental sustainability, youth empowerment, digital innovation, community development, and advocacy."
         />
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">

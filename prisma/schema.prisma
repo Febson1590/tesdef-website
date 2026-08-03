@@ -47,6 +47,7 @@ model Project {
   supporterCount Int              @default(0)
   status         String           @default("active")
   howFundsUsed   String           @default("[]")
+  isSample       Boolean          @default(false)
   published      Boolean          @default(true)
   images         ProjectImage[]
   updates        ProjectUpdate[]
@@ -83,6 +84,7 @@ model NewsPost {
   coverImage  String    @default("")
   category    String    @default("")
   tags        String    @default("[]")
+  isSample    Boolean   @default(false)
   published   Boolean   @default(true)
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
@@ -101,6 +103,7 @@ model Event {
   startDate        DateTime
   endDate          DateTime?
   registrationLink String    @default("")
+  isSample         Boolean   @default(false)
   published        Boolean   @default(true)
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt

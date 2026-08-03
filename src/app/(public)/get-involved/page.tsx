@@ -26,7 +26,7 @@ const OPTIONS = [
   },
   {
     title: "Donate",
-    description: "Every contribution — large or small — goes directly to the communities we serve. Choose a project to support or give to our general fund.",
+    description: "Every contribution — large or small — supports TESDEF's work with the communities we serve. Choose a project to support or give to our general fund.",
     bullets: ["Support specific projects", "General operational fund", "Monthly giving options", "Corporate matched giving"],
     cta: "Donate now",
     href: "/donate",

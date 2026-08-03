@@ -27,7 +27,7 @@ const CONTACT_INFO = [
   },
   {
     label: "Location",
-    value: "Warri, Delta State, Nigeria",
+    value: "Delta State, Nigeria",
     icon: (
       <><path d="M12 22c5-3.5 8-7.5 8-12a8 8 0 1 0-16 0c0 4.5 3 8.5 8 12Z" /><path d="M12 11.5v.01" /></>
     ),

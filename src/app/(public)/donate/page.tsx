@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { Container } from "@/components/Container";
 import { PROJECTS } from "@/lib/data";
-import { ProgressBar } from "@/components/ui/ProgressBar";
-import { formatCurrency, progressPercent } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 
 const AMOUNTS = [500, 1000, 2500, 5000, 10000, 25000];
 
@@ -45,7 +44,7 @@ export default function DonatePage() {
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">Support our work</p>
             <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Make a donation</h1>
             <p className="mt-5 text-lg text-white/70">
-              Every contribution goes directly to communities in the Niger Delta. No payment processing is live yet — this page records pledges.
+              Your support helps TESDEF advance its mission across its areas of focus. No payment processing is live yet — this page records pledges.
             </p>
           </div>
         </Container>
@@ -133,16 +132,14 @@ export default function DonatePage() {
               )}
             </div>
 
-            {/* Active campaigns sidebar */}
+            {/* Projects sidebar */}
             <aside className="space-y-4">
-              <h2 className="font-display text-lg font-bold text-forest">Active campaigns</h2>
+              <h2 className="font-display text-lg font-bold text-forest">Our projects</h2>
+              <p className="text-xs text-muted">Sample content — pending client confirmation.</p>
               {activeProjects.slice(0, 4).map((p) => (
                 <div key={p.id} className="rounded-xl border border-black/5 bg-offwhite p-4">
                   <p className="text-sm font-semibold text-forest">{p.title}</p>
-                  <ProgressBar percent={progressPercent(p.amountRaised, p.fundingGoal)} className="mt-2" />
-                  <p className="mt-1.5 text-xs text-muted">
-                    {formatCurrency(p.amountRaised)} raised · {p.supporterCount} supporters
-                  </p>
+                  <p className="mt-1 text-xs text-muted">{p.programmeName}</p>
                 </div>
               ))}
             </aside>

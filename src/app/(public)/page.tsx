@@ -14,7 +14,7 @@ import { PartnersSection } from "@/components/sections/PartnersSection";
 export const metadata: Metadata = {
   title: "TESDEF — Tamarakuro Environmental and Sustainable Development Foundation",
   description:
-    "TESDEF promotes environmental sustainability, youth empowerment, digital innovation and community development across Gbaramatu Kingdom, the Niger Delta and beyond.",
+    "TESDEF advances environmental sustainability, youth empowerment, digital innovation and inclusive community development to create resilient communities and lasting impact.",
 };
 
 export default function Home() {

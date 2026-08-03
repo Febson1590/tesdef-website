@@ -73,11 +73,13 @@ async function main() {
         supporterCount: p.supporterCount,
         status: p.status,
         howFundsUsed: JSON.stringify(p.howFundsUsed),
+        isSample: p.isSample,
         published: p.published,
       },
     });
-    // Project updates
-    for (const u of p.updates) {
+    // Project updates (sample projects currently have none)
+    const updates = p.updates as Array<{ date: string; title: string; content: string }>;
+    for (const u of updates) {
       await prisma.projectUpdate.create({
         data: {
           projectId: p.id,
@@ -104,6 +106,7 @@ async function main() {
         coverImage: n.coverImage,
         category: n.category,
         tags: JSON.stringify(n.tags),
+        isSample: n.isSample,
         published: n.published,
         publishedAt: new Date(n.publishedAt),
       },
@@ -127,6 +130,7 @@ async function main() {
         startDate: new Date(e.startDate),
         endDate: e.endDate ? new Date(e.endDate) : null,
         registrationLink: e.registrationLink,
+        isSample: e.isSample,
         published: e.published,
       },
     });

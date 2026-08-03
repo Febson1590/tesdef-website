@@ -30,6 +30,7 @@ type Props = {
   amountRaised: number;
   supporterCount: number;
   status: string;
+  isSample?: boolean;
   className?: string;
 };
 
@@ -44,6 +45,7 @@ export function ProjectCard({
   amountRaised,
   supporterCount,
   status,
+  isSample,
   className,
 }: Props) {
   const pct = progressPercent(amountRaised, fundingGoal);
@@ -67,10 +69,11 @@ export function ProjectCard({
         ) : (
           <div className="h-full bg-gradient-to-br from-mint to-fresh/20" />
         )}
-        <div className="absolute left-3 top-3">
+        <div className="absolute left-3 top-3 flex flex-wrap gap-2">
           <Badge variant={STATUS_VARIANT[status] ?? "default"}>
             {STATUS_LABEL[status] ?? status}
           </Badge>
+          {isSample && <Badge variant="warning">Sample</Badge>}
         </div>
       </div>
 

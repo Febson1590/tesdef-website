@@ -24,7 +24,7 @@ const STEPS = [
     step: "04",
     title: "Measure and learn",
     description:
-      "We track outcomes rigorously, celebrate what works, and adapt what doesn't. Independent evaluations confirm our impact and guide our next steps.",
+      "We aim to track outcomes, celebrate what works, and adapt what doesn't — letting evidence guide our next steps.",
   },
 ];
 

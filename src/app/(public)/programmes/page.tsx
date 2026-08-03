@@ -35,7 +35,7 @@ export default async function ProgrammesPage() {
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">What we do</p>
             <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">Our programmes</h1>
             <p className="mt-5 text-lg leading-relaxed text-white/70">
-              Five interconnected areas of work, each addressing a root cause of community vulnerability and environmental decline in the Niger Delta.
+              Five interconnected areas of work spanning environmental sustainability, youth empowerment, digital innovation, community development, and advocacy.
             </p>
           </div>
         </Container>

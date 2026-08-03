@@ -38,8 +38,8 @@ export async function ProjectsSection() {
           <SectionHeading
             id="projects-heading"
             label="Active campaigns"
-            title="Projects making a difference"
-            subtitle="Real work happening now across Gbaramatu Kingdom and the Niger Delta."
+            title="Our projects"
+            subtitle="Examples of the work TESDEF is set up to deliver. Sample content — pending client confirmation."
             align="left"
           />
           <Link href="/projects" className="flex-none text-sm font-semibold text-primary hover:text-forest">
@@ -61,6 +61,7 @@ export async function ProjectsSection() {
               amountRaised={p.amountRaised}
               supporterCount={p.supporterCount}
               status={p.status}
+              isSample={"isSample" in p ? Boolean(p.isSample) : false}
             />
           ))}
         </div>

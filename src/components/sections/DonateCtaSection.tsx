@@ -20,7 +20,7 @@ export function DonateCtaSection() {
             Your contribution creates lasting change
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/70">
-            Every naira donated goes directly to programmes that protect the environment, empower young people, and build stronger communities in the Niger Delta. No contribution is too small.
+            Your support helps TESDEF advance environmental sustainability, youth empowerment, digital innovation and inclusive community development. No contribution is too small.
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
@@ -45,7 +45,7 @@ export function DonateCtaSection() {
           </div>
 
           <p className="mt-6 text-xs text-white/50">
-            TESDEF is a registered non-profit organisation. All donations are subject to our transparency and accountability commitments.
+            Payment processing is not yet live — this records a pledge, and we will be in touch when it is activated.
           </p>
         </div>
       </Container>

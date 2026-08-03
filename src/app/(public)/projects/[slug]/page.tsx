@@ -87,6 +87,12 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
             {/* Main content */}
             <div>
+              {project.isSample && (
+                <div className="mb-6 rounded-2xl border border-dashed border-primary/30 bg-offwhite p-4 text-sm text-muted">
+                  <span className="font-semibold text-forest">Sample content — pending client confirmation.</span>{" "}
+                  This is an illustrative example. Verified details will be added by TESDEF.
+                </div>
+              )}
               <p className="text-lg leading-relaxed text-muted">{project.summary}</p>
 
               {project.story && (

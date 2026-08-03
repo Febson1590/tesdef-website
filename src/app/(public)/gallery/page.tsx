@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "Photos from TESDEF's programmes and projects — communities, environment, and impact across the Niger Delta.",
+  description: "Photos from TESDEF's work across communities, environment, and its areas of focus.",
 };
 
 async function getGalleryItems() {
@@ -31,7 +31,7 @@ export default async function GalleryPage() {
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">Photos</p>
             <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Gallery</h1>
-            <p className="mt-5 text-lg text-white/70">Communities, environment, and impact — captured across the Niger Delta.</p>
+            <p className="mt-5 text-lg text-white/70">Sample images — pending the client&apos;s own photographs.</p>
           </div>
         </Container>
       </section>

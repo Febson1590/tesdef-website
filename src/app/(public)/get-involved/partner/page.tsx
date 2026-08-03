@@ -40,7 +40,7 @@ export default function PartnerPage() {
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-fresh/80">Partnerships</p>
             <h1 className="font-display text-3xl font-extrabold text-white sm:text-4xl">Partner with TESDEF</h1>
             <p className="mt-5 text-lg text-white/70">
-              Strategic partnerships that amplify impact. Let's explore what we can build together.
+              Strategic partnerships that amplify impact. Let&apos;s explore what we can build together.
             </p>
           </div>
         </Container>

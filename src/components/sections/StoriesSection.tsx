@@ -14,6 +14,9 @@ async function getTestimonials() {
 export async function StoriesSection() {
   const testimonials = await getTestimonials();
 
+  // No verified testimonials yet — hide the section rather than show placeholders.
+  if (testimonials.length === 0) return null;
+
   return (
     <section aria-labelledby="stories-heading" className="bg-mint py-16 sm:py-20 lg:py-24">
       <Container>

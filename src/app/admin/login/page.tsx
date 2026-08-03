@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Logo } from "@/components/Logo";
 
 export default function AdminLoginPage() {
@@ -81,7 +82,7 @@ export default function AdminLoginPage() {
           </form>
         </div>
         <p className="mt-6 text-center text-xs text-muted">
-          <a href="/" className="hover:text-primary hover:underline">← Back to website</a>
+          <Link href="/" className="hover:text-primary hover:underline">← Back to website</Link>
         </p>
       </div>
     </div>

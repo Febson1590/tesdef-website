@@ -5,29 +5,29 @@ const PILLARS = [
     icon: (
       <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
     ),
-    title: "Registered & accountable",
-    description: "TESDEF is a duly registered foundation in Nigeria with full financial auditing, annual reporting, and board-level oversight of all programmes.",
+    title: "Accountable",
+    description: "We are committed to operating responsibly, with clear oversight of our programmes and openness about our work.",
   },
   {
     icon: (
       <><path d="M9 14l6-6" /><circle cx="9.5" cy="9.5" r="1.5" /><circle cx="14.5" cy="14.5" r="1.5" /><path d="M3 3l18 18M21 3L3 21" className="hidden" /><rect x="3" y="3" width="18" height="18" rx="2" /></>
     ),
-    title: "Transparent finances",
-    description: "We publish detailed breakdowns of how every programme budget is spent. Donors can request full financial reports at any time.",
+    title: "Transparent",
+    description: "We are committed to being open about how programme resources are used and to sharing information with our supporters and communities.",
   },
   {
     icon: (
       <><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></>
     ),
-    title: "Impact-evaluated",
-    description: "Independent evaluators review our programmes annually and report publicly. We share both our successes and what we are still learning.",
+    title: "Evidence & learning",
+    description: "We aim to measure outcomes, learn from what works, and share both our successes and the lessons along the way.",
   },
   {
     icon: (
       <path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
     ),
-    title: "Community-governed",
-    description: "Our board includes elected representatives from the communities we serve. Community voices shape our strategy and hold us accountable.",
+    title: "Community-led",
+    description: "Communities are partners in our work. Their voices shape our priorities, and we design programmes together with the people they serve.",
   },
 ];
 
@@ -36,9 +36,9 @@ export function TrustSection() {
     <section aria-labelledby="trust-heading" className="border-t border-black/5 bg-white py-16 sm:py-20">
       <Container>
         <div className="mb-10 text-center">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary/70">Accountability</p>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-primary/70">Our commitments</p>
           <h2 id="trust-heading" className="font-display text-2xl font-bold text-forest sm:text-3xl">
-            Why you can trust TESDEF
+            How TESDEF works
           </h2>
         </div>
 

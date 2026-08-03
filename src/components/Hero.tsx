@@ -29,7 +29,7 @@ export function Hero() {
               Environmental &amp; Sustainable Development Foundation
             </span>
             <span className="hidden lg:inline">
-              Tamarakuro Environmental &amp; Sustainable Development Foundation
+              Tamarakuro Environmental and Sustainable Development Foundation
             </span>
           </p>
 
@@ -45,22 +45,14 @@ export function Hero() {
           </h1>
 
           <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-muted sm:mt-6 sm:text-lg">
-            <span className="lg:hidden">
-              TESDEF works to support environmental sustainability, empower young
-              people, encourage digital innovation, and build inclusive
-              communities. Our goal is to help communities become stronger and
-              make a lasting difference.
-            </span>
-            <span className="hidden lg:inline">
-              TESDEF promotes environmental sustainability, youth empowerment,
-              digital innovation and community development across Gbaramatu
-              Kingdom, the Niger Delta and beyond.
-            </span>
+            TESDEF advances environmental sustainability, youth empowerment,
+            digital innovation and inclusive community development to create
+            resilient communities and lasting impact.
           </p>
 
           <div className="mt-7 flex flex-col gap-2.5 sm:mt-8 sm:flex-row sm:items-center sm:gap-3">
             <Button
-              href="#"
+              href="/projects"
               variant="primary"
               size="lg"
               className="w-full sm:w-auto"
@@ -80,7 +72,7 @@ export function Hero() {
               </svg>
             </Button>
             <Button
-              href="#"
+              href="/get-involved"
               variant="secondary"
               size="lg"
               className="w-full sm:w-auto"
@@ -121,8 +113,8 @@ export function Hero() {
               <path d="M12 11.5v.01" />
             </svg>
             <p className="max-w-md text-sm leading-relaxed text-muted">
-              Creating resilient communities through sustainability, innovation
-              and inclusive development.
+              Rooted in Gbaramatu Kingdom and the Niger Delta — working with
+              communities across Nigeria and beyond.
             </p>
           </div>
         </div>

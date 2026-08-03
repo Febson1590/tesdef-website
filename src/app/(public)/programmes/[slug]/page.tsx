@@ -24,7 +24,7 @@ export default async function ProgrammeDetailPage({ params }: Props) {
   const { slug } = await params;
 
   let programme;
-  let projects: { id: string; title: string; summary: string; coverImage: string; slug: string; fundingGoal: number; amountRaised: number; supporterCount: number; status: string; programme: { title: string; slug: string } | null }[] = [];
+  let projects: { id: string; title: string; summary: string; coverImage: string; slug: string; fundingGoal: number; amountRaised: number; supporterCount: number; status: string; isSample: boolean; programme: { title: string; slug: string } | null }[] = [];
 
   try {
     programme = await prisma.programme.findUnique({
@@ -82,6 +82,7 @@ export default async function ProgrammeDetailPage({ params }: Props) {
                   amountRaised={p.amountRaised}
                   supporterCount={p.supporterCount}
                   status={p.status}
+                  isSample={Boolean(p.isSample)}
                 />
               ))}
             </div>
@@ -94,7 +95,7 @@ export default async function ProgrammeDetailPage({ params }: Props) {
           <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
             <div className="flex-1">
               <h2 className="font-display text-xl font-bold text-forest">Support this programme</h2>
-              <p className="mt-1 text-sm text-muted">Your contribution directly funds the projects that bring this programme to life.</p>
+              <p className="mt-1 text-sm text-muted">Your support helps TESDEF advance its work in this area.</p>
             </div>
             <Button href="/donate" variant="primary" size="lg">Donate</Button>
           </div>
