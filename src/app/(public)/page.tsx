@@ -9,6 +9,11 @@ import { GetInvolvedSection } from "@/components/sections/GetInvolvedSection";
 import { TrustSection } from "@/components/sections/TrustSection";
 import { PartnersSection } from "@/components/sections/PartnersSection";
 
+// Render on demand so the homepage always reflects the current published
+// database content (featured initiatives, programmes, news, partners) rather
+// than a statically cached snapshot.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "TESDEF — Tamarakuro Environmental and Sustainable Development Foundation",
   description:

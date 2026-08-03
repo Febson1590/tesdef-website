@@ -4,12 +4,21 @@ import { SEED_PROGRAMMES, SEED_TEAM } from "../src/lib/data";
 
 const prisma = new PrismaClient();
 
-// Production-safe seed: creates ONLY the admin user and the official published
-// content (programme areas + founder). It does NOT create any sample projects,
-// news, events, gallery, impact stats, partners or testimonials — those are
-// added and published by an authorised admin through the dashboard.
+// Seed policy:
+//   • Creates ONLY the admin user + official published content (programme areas
+//     + founder). It NEVER creates mock projects, news, events, gallery, impact
+//     stats, partners or testimonials — those are added/published by an admin.
+//   • It is NOT part of the Vercel build (build runs `prisma generate && next
+//     build` only), so production deploys never auto-create any content.
+//   • As a safety net, it refuses to run against a production environment unless
+//     ALLOW_PROD_SEED=1 is explicitly set.
 
 async function main() {
+  if (process.env.NODE_ENV === "production" && process.env.ALLOW_PROD_SEED !== "1") {
+    console.log("⏭  Skipping seed: production environment (set ALLOW_PROD_SEED=1 to override).");
+    return;
+  }
+
   console.log("🌱 Seeding database...");
 
   const hashedPassword = await bcrypt.hash("Tesdef2026!", 12);
