@@ -16,7 +16,8 @@ export type ContentModel =
   | "impactStat"
   | "testimonial"
   | "teamMember"
-  | "partner";
+  | "partner"
+  | "heroSlide";
 
 type StatusClient = Record<ContentModel, { update: (args: { where: { id: string }; data: Record<string, unknown> }) => Promise<unknown> }>;
 

@@ -176,6 +176,17 @@ model Partner {
   updatedAt DateTime @updatedAt
 }
 
+model HeroSlide {
+  id        String   @id @default(cuid())
+  image     String
+  title     String   @default("")
+  caption   String   @default("")
+  order     Int      @default(0)
+  status    String   @default("draft")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 // ─── Forms / enquiries ────────────────────────────────────────────────────────
 
 // Support-interest submissions (no live payment processing).

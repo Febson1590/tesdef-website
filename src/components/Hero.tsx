@@ -1,8 +1,24 @@
 import Image from "next/image";
 import { Container } from "./Container";
 import { Button } from "./Button";
+import { HeroCarousel } from "./HeroCarousel";
+import { prisma } from "@/lib/prisma";
 
-export function Hero() {
+async function getHeroSlides() {
+  try {
+    const slides = await prisma.heroSlide.findMany({
+      where: { status: "published" },
+      orderBy: [{ order: "asc" }, { createdAt: "asc" }],
+    });
+    return slides.map((s) => ({ id: s.id, image: s.image, title: s.title, caption: s.caption }));
+  } catch {
+    return [];
+  }
+}
+
+export async function Hero() {
+  const slides = await getHeroSlides();
+
   return (
     <section
       aria-labelledby="hero-heading"
@@ -119,9 +135,9 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Visual column — real photograph, premium framing */}
+        {/* Visual column — admin-controlled carousel, or the default image when no slides are published */}
         <div className="relative">
-          <HeroVisual />
+          {slides.length > 0 ? <HeroCarousel slides={slides} /> : <HeroVisual />}
         </div>
       </Container>
     </section>
