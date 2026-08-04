@@ -7,7 +7,7 @@ import { createHeroSlide, updateHeroSlide, moveHeroSlide, deleteHeroSlide } from
 export const metadata = { title: "Hero Slides" };
 
 const inputCls = "w-full rounded-xl border border-black/15 px-4 py-2.5 text-sm focus:border-primary focus:outline-none";
-const moveBtn = "grid h-7 w-7 place-items-center rounded-lg border border-black/15 text-sm text-ink hover:bg-offwhite disabled:cursor-not-allowed disabled:opacity-40";
+const moveBtn = "grid h-11 w-11 place-items-center rounded-lg border border-black/15 text-base text-ink hover:bg-offwhite disabled:cursor-not-allowed disabled:opacity-40 lg:h-8 lg:w-8 lg:text-sm";
 
 export default async function AdminHeroPage() {
   const slides = await prisma.heroSlide.findMany({ orderBy: [{ order: "asc" }, { createdAt: "asc" }] });
@@ -15,7 +15,7 @@ export default async function AdminHeroPage() {
   return (
     <>
       <AdminHeader title="Hero Slides" />
-      <div className="p-6 space-y-8">
+      <div className="space-y-6 p-4 sm:space-y-8 sm:p-6 lg:p-8">
         <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
           <h2 className="mb-1 font-display text-lg font-bold text-forest">Add hero slide</h2>
           <p className="mb-5 text-xs text-muted">
@@ -39,7 +39,7 @@ export default async function AdminHeroPage() {
               <input name="caption" maxLength={140} className={inputCls} placeholder="Short supporting caption" />
             </div>
             <div className="sm:col-span-2">
-              <button type="submit" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white hover:bg-forest">Add (as draft)</button>
+              <button type="submit" className="sticky bottom-3 z-10 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-white shadow-lg hover:bg-forest lg:static lg:bottom-auto lg:z-auto lg:w-auto lg:shadow-none">Add (as draft)</button>
             </div>
           </form>
         </section>
@@ -79,14 +79,14 @@ export default async function AdminHeroPage() {
                       <div className="flex items-center gap-2">
                         <label className="text-xs text-muted">Order</label>
                         <input name="order" type="number" defaultValue={s.order} className="w-20 rounded-xl border border-black/15 px-3 py-2 text-sm focus:border-primary focus:outline-none" />
-                        <button type="submit" className="rounded-full border border-primary/30 px-4 py-1.5 text-xs font-semibold text-primary hover:bg-mint">Save changes</button>
+                        <button type="submit" className="inline-flex min-h-11 items-center rounded-full border border-primary/30 px-4 text-xs font-semibold text-primary hover:bg-mint lg:min-h-0 lg:py-1.5">Save changes</button>
                       </div>
                     </form>
 
                     <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-black/5 pt-3">
                       <AdminRowActions model="heroSlide" id={s.id} status={s.status} adminPath="/admin/hero" />
                       <form action={deleteHeroSlide.bind(null, s.id)}>
-                        <button type="submit" className="text-xs font-semibold text-red-500 hover:underline">Delete</button>
+                        <button type="submit" className="inline-flex min-h-11 items-center text-xs font-semibold text-red-500 hover:underline lg:min-h-0">Delete</button>
                       </form>
                     </div>
                   </div>

@@ -36,14 +36,14 @@ export default async function AdminDashboard() {
   return (
     <>
       <AdminHeader title="Dashboard" />
-      <div className="p-6 space-y-8">
+      <div className="space-y-6 p-4 sm:space-y-8 sm:p-6 lg:p-8">
         {/* Content counts */}
         <div>
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">Content overview</h2>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 min-[380px]:grid-cols-2 lg:grid-cols-4">
             {STAT_CARDS.map((card, i) => (
-              <Link key={card.label} href={card.href} className="rounded-xl border border-black/10 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
-                <p className={`mb-2 inline-block rounded-lg px-2.5 py-1 text-2xl font-bold ${card.color}`}>{counts[i]}</p>
+              <Link key={card.label} href={card.href} className="rounded-2xl border border-black/10 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+                <p className={`mb-2 inline-block rounded-lg px-2.5 py-1 text-3xl font-bold ${card.color}`}>{counts[i]}</p>
                 <p className="text-sm font-medium text-ink">{card.label}</p>
               </Link>
             ))}
@@ -53,7 +53,7 @@ export default async function AdminDashboard() {
         {/* Inbox */}
         <div>
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted">Inbox</h2>
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 min-[380px]:grid-cols-2 lg:grid-cols-3">
             {inboxItems.map((item) => (
               <Link key={item.label} href={item.href}
                 className={`flex items-center justify-between rounded-xl border p-5 shadow-sm transition-shadow hover:shadow-md ${item.urgent ? "border-amber-200 bg-amber-50" : "border-black/10 bg-white"}`}>
@@ -101,7 +101,7 @@ export default async function AdminDashboard() {
               { href: "/admin/gallery", label: "Upload to gallery" },
             ].map((a) => (
               <Link key={a.href} href={a.href}
-                className="rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white">
+                className="inline-flex min-h-11 items-center rounded-full border border-primary/30 bg-white px-5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white">
                 {a.label}
               </Link>
             ))}

@@ -10,7 +10,8 @@ export function StatusBadge({ status }: { status: string }) {
   return <span className={`inline-block rounded-full px-2 py-0.5 text-xs font-semibold capitalize ${cls}`}>{status}</span>;
 }
 
-const btn = "rounded-full border px-2.5 py-1 text-xs font-semibold transition-colors";
+// Touch-friendly on mobile (≥44px tap target); compact on desktop.
+const btn = "inline-flex min-h-11 items-center justify-center rounded-full border px-3.5 text-xs font-semibold transition-colors lg:min-h-[30px] lg:px-2.5 lg:py-1";
 
 type Props = {
   model: ContentModel;

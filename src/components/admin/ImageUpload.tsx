@@ -145,7 +145,7 @@ export function ImageUpload({ name, label = "Image", initialUrl = "", hint }: Pr
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={status === "uploading"}
-              className="rounded-full border border-black/15 px-4 py-1.5 text-xs font-semibold text-ink hover:bg-white disabled:opacity-50"
+              className="inline-flex min-h-11 items-center rounded-full border border-black/15 px-4 text-xs font-semibold text-ink hover:bg-white disabled:opacity-50 lg:min-h-0 lg:py-1.5"
             >
               Replace
             </button>
@@ -153,7 +153,7 @@ export function ImageUpload({ name, label = "Image", initialUrl = "", hint }: Pr
               type="button"
               onClick={reset}
               disabled={status === "uploading"}
-              className="rounded-full border border-red-200 px-4 py-1.5 text-xs font-semibold text-red-500 hover:bg-red-50 disabled:opacity-50"
+              className="inline-flex min-h-11 items-center rounded-full border border-red-200 px-4 text-xs font-semibold text-red-500 hover:bg-red-50 disabled:opacity-50 lg:min-h-0 lg:py-1.5"
             >
               Remove
             </button>

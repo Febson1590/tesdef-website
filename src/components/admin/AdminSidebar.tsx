@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Logo } from "@/components/Logo";
 import { cn } from "@/lib/utils";
+import { useAdminNav } from "./AdminNavContext";
 
 const NAV = [
   {
@@ -37,7 +38,8 @@ const NAV = [
   },
 ];
 
-export function AdminSidebar() {
+// Shared nav content used by both the desktop sidebar and the mobile drawer.
+function NavContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   async function handleLogout() {
@@ -46,9 +48,9 @@ export function AdminSidebar() {
   }
 
   return (
-    <aside className="flex h-full w-64 flex-col border-r border-black/10 bg-white">
-      <div className="flex h-16 items-center border-b border-black/10 px-5">
-        <Link href="/admin" aria-label="Admin home">
+    <>
+      <div className="flex h-16 flex-none items-center border-b border-black/10 px-5">
+        <Link href="/admin" aria-label="Admin home" onClick={onNavigate}>
           <Logo />
         </Link>
       </div>
@@ -62,13 +64,14 @@ export function AdminSidebar() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={onNavigate}
                   className={cn(
-                    "mx-2 flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                    "mx-2 flex min-h-11 items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors lg:min-h-0 lg:py-2",
                     isActive ? "bg-mint text-forest" : "text-ink hover:bg-offwhite"
                   )}
                   aria-current={isActive ? "page" : undefined}
                 >
-                  <svg viewBox="0 0 24 24" className="h-4 w-4 flex-none" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" className="h-5 w-5 flex-none lg:h-4 lg:w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     {item.icon}
                   </svg>
                   {item.label}
@@ -78,17 +81,49 @@ export function AdminSidebar() {
           </div>
         ))}
       </nav>
-      <div className="border-t border-black/10 p-4">
+      <div className="flex-none border-t border-black/10 p-4">
         <button
           onClick={handleLogout}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-red-50 hover:text-red-600"
+          className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-red-50 hover:text-red-600 lg:min-h-0"
         >
-          <svg viewBox="0 0 24 24" className="h-4 w-4 flex-none" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" className="h-5 w-5 flex-none lg:h-4 lg:w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" y1="12" x2="9" y2="12" />
           </svg>
           Sign out
         </button>
       </div>
-    </aside>
+    </>
+  );
+}
+
+export function AdminSidebar() {
+  const { open, setOpen } = useAdminNav();
+
+  return (
+    <>
+      {/* Desktop: fixed sidebar (≥1024px) */}
+      <aside className="hidden border-r border-black/10 bg-white lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:w-64 lg:flex-col">
+        <NavContent />
+      </aside>
+
+      {/* Mobile: slide-out drawer (<1024px) */}
+      <div className={cn("fixed inset-0 z-50 lg:hidden", open ? "pointer-events-auto" : "pointer-events-none")} aria-hidden={!open}>
+        <div
+          onClick={() => setOpen(false)}
+          className={cn("absolute inset-0 bg-black/40 transition-opacity duration-300", open ? "opacity-100" : "opacity-0")}
+        />
+        <aside
+          role="dialog"
+          aria-modal="true"
+          aria-label="Admin menu"
+          className={cn(
+            "absolute inset-y-0 left-0 flex w-72 max-w-[85%] flex-col bg-white shadow-2xl transition-transform duration-300 ease-out",
+            open ? "translate-x-0" : "-translate-x-full"
+          )}
+        >
+          <NavContent onNavigate={() => setOpen(false)} />
+        </aside>
+      </div>
+    </>
   );
 }

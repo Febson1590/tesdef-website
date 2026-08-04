@@ -11,7 +11,7 @@ export default async function AdminSupportPage() {
   return (
     <>
       <AdminHeader title="Support interest" />
-      <div className="p-6 space-y-6">
+      <div className="space-y-6 p-4 sm:p-6 lg:p-8">
         <div className="rounded-xl border border-black/10 bg-white px-6 py-4 shadow-sm">
           <p className="text-sm text-muted">Support-interest submissions</p>
           <p className="font-display text-2xl font-bold text-forest">{records.length}</p>

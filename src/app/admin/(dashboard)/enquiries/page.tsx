@@ -11,7 +11,7 @@ export default async function AdminEnquiriesPage() {
   return (
     <>
       <AdminHeader title="Partnership Enquiries" />
-      <div className="p-6">
+      <div className="p-4 sm:p-6 lg:p-8">
         <p className="mb-4 text-sm text-muted">{enquiries.filter((e) => e.status === "pending").length} pending of {enquiries.length} total</p>
         <AdminTable
           keyField="id"

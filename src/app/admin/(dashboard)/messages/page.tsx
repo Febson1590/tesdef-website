@@ -11,7 +11,7 @@ export default async function AdminMessagesPage() {
   return (
     <>
       <AdminHeader title="Contact Messages" />
-      <div className="p-6">
+      <div className="p-4 sm:p-6 lg:p-8">
         <p className="mb-4 text-sm text-muted">{messages.filter((m) => !m.read).length} unread of {messages.length} total</p>
         <AdminTable
           keyField="id"

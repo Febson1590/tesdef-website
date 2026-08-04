@@ -11,7 +11,7 @@ export default async function AdminVolunteersPage() {
   return (
     <>
       <AdminHeader title="Volunteer Applications" />
-      <div className="p-6">
+      <div className="p-4 sm:p-6 lg:p-8">
         <p className="mb-4 text-sm text-muted">{applications.filter((a) => a.status === "pending").length} pending of {applications.length} total</p>
         <AdminTable
           keyField="id"
